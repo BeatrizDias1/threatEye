@@ -1,0 +1,186 @@
+
+:root {
+    --bg-main: #1c112b;
+    --bg-dark: rgba(20, 11, 33, 0.75);
+    /* Vidro real: baixa opacidade + leve gradiente */
+    --sidebar-glass: linear-gradient(
+        135deg,
+        rgba(46, 29, 74, 0.35) 0%,
+        rgba(24, 14, 41, 0.25) 100%
+    );
+    --border-glass: rgba(192, 132, 252, 0.28);
+    --accent-purple: #8b3dff;
+    --accent-hover: #7328e6;
+    --active-pill: rgba(139, 61, 255, 0.28);
+    --text-main: #ffffff;
+    --text-muted: #b5a6cc;
+    --topbar-height: 70px;
+    --sidebar-width: 260px;
+}
+
+
+/* Fundo idêntico ao da Home */
+body {
+    background-color: var(--bg-main);
+    background-image:
+        radial-gradient(
+            circle at 12% 28%,
+            rgba(139, 61, 255, 0.32) 0%,
+            transparent 42%
+        ),
+        radial-gradient(
+            circle at 82% 75%,
+            rgba(192, 38, 211, 0.18) 0%,
+            transparent 45%
+        );
+
+    background-attachment: fixed;
+    color: var(--text-main);
+    font-family: -apple-system, BlinkMacSystemFont,
+        "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+    min-height: 100vh;
+}
+
+/* Centralização */
+.login-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+}
+
+/* Card com o mesmo vidro da sidebar */
+.login-card {
+    width: 100%;
+    max-width: 420px;
+    padding: 40px;
+
+    background: var(--sidebar-glass);
+
+    backdrop-filter: blur(22px) saturate(160%);
+    -webkit-backdrop-filter: blur(22px) saturate(160%);
+
+    border: 1px solid var(--border-glass);
+    border-radius: 20px;
+
+    box-shadow:
+        0 12px 32px rgba(0, 0, 0, 0.45),
+        inset 0 1px 1px rgba(255, 255, 255, 0.18);
+
+    color: var(--text-main);
+}
+
+/* Espaçamento entre os campos */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+/* Labels */
+.input-group label {
+    color: var(--text-main);
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.forgot-password {
+    color: var(--accent-purple);
+    font-size: 12px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.forgot-password:hover {
+    color: var(--accent-hover);
+    text-decoration: underline;
+}
+
+/* Caixa do input */
+.input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 0 14px;
+    height: 48px;
+
+    background: rgba(20, 11, 33, 0.55);
+    border: 1px solid var(--border-glass);
+    border-radius: 10px;
+
+    transition: all 0.25s ease;
+}
+
+/* Destaque quando o usuário clica no campo */
+.input-wrapper:focus-within {
+    border-color: var(--accent-purple);
+    box-shadow: 0 0 12px rgba(139, 61, 255, 0.20);
+}
+
+/* Ícones */
+.input-wrapper i {
+    color: var(--text-muted);
+    font-size: 15px;
+}
+
+/* Campo de texto */
+.input-wrapper input {
+    width: 100%;
+    height: 100%;
+
+    background: transparent;
+    border: none;
+    outline: none;
+
+    color: var(--text-main);
+    font-size: 14px;
+}
+
+/* Placeholder */
+.input-wrapper input::placeholder {
+    color: rgba(181, 166, 204, 0.55);
+}
+
+.btn-submit {
+    background-color: var(--accent-purple);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-submit:hover {
+    background-color: var(--accent-hover);
+}
+
+.login-footer {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 15px;
+    color: var(--accent-purple);
+}
+
+.login-footer a:hover{
+    color: var(--accent-hover);
+    text-decoration: underline;
+}
