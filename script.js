@@ -578,3 +578,211 @@ document.addEventListener("DOMContentLoaded", () => {
 
     atualizarContador();
 });
+
+// ==========================================
+// 7. NAVEGAÇÃO INTERNA E SUBTELAS DA BIBLIOTECA
+// ==========================================
+document.addEventListener("DOMContentLoaded", () => {
+    const app = document.getElementById("bibliotecaApp");
+    if (!app) return;
+
+    const views = app.querySelectorAll(".bib-view");
+    const viewButtons = document.querySelectorAll("[data-bib-view]");
+
+    const toast = document.querySelector(".toast") || (() => {
+        const el = document.createElement("div");
+        el.className = "toast";
+        document.body.appendChild(el);
+        return el;
+    })();
+
+    let toastTimer;
+    const notifyView = msg => {
+        toast.textContent = msg;
+        toast.classList.add("show");
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toast.classList.remove("show"), 2300);
+    };
+
+    const abrirView = viewName => {
+        const alvo = document.getElementById(`view-${viewName}`);
+        if (!alvo) return;
+
+        views.forEach(v => { v.hidden = v !== alvo; });
+
+        viewButtons.forEach(btn => {
+            if (btn.classList.contains("sidebar__subitem") || btn.closest(".sidebar__group")) {
+                btn.classList.toggle("active", btn.dataset.bibView === viewName);
+            }
+        });
+
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+
+    viewButtons.forEach(btn => {
+        btn.addEventListener("click", () => abrirView(btn.dataset.bibView));
+    });
+
+    // --- Filtros da Timeline ---
+    const tlFilters = document.querySelectorAll("[data-tl-filter]");
+    const tlFeed = document.getElementById("timelineFeed");
+    tlFilters.forEach(btn => {
+        btn.addEventListener("click", () => {
+            tlFilters.forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+            const tipo = btn.dataset.tlFilter;
+            if (!tlFeed) return;
+            tlFeed.querySelectorAll(".timeline-item").forEach(item => {
+                item.hidden = tipo !== "todos" && item.dataset.tlType !== tipo;
+            });
+        });
+    });
+
+    const loadMoreTl = document.getElementById("loadMoreTimeline");
+    if (loadMoreTl && tlFeed) {
+        loadMoreTl.addEventListener("click", () => {
+            if (loadMoreTl.dataset.loaded === "1") return notifyView("Todos os eventos recentes já foram carregados.");
+            const extra = document.createElement("article");
+            extra.className = "timeline-item";
+            extra.dataset.tlType = "analise";
+            extra.innerHTML = `
+                <div class="tl-badge info"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+                <div class="tl-body">
+                    <div class="tl-meta"><span>07:12:44 · Ontem</span><span class="status approved">Concluído</span></div>
+                    <h3>Varredura de Reputação de Domínios</h3>
+                    <p>18 domínios recém-observados no proxy corporativo foram correlacionados sem indícios de C2.</p>
+                    <div class="tl-tags"><span>ID: #74819</span><span>Por: Sistema ThreatEye</span></div>
+                </div>`;
+            tlFeed.appendChild(extra);
+            loadMoreTl.dataset.loaded = "1";
+            notifyView("Eventos anteriores carregados na timeline.");
+        });
+    }
+
+    // --- Busca, Filtros e Copiar na Base de IoCs ---
+    const iocSearch = document.getElementById("iocSearchInput");
+    const iocType = document.getElementById("iocTypeFilter");
+    const iocSev = document.getElementById("iocSeverityFilter");
+    const iocOrigin = document.getElementById("iocOriginFilter");
+    const iocsTbody = document.getElementById("iocsTbody");
+    const iocPageInfo = document.getElementById("iocPageInfo");
+
+    const filtrarIocs = () => {
+        if (!iocsTbody) return;
+        const termo = (iocSearch?.value || "").trim().toLowerCase();
+        const tipo = iocType?.value || "todos";
+        const sev = iocSev?.value || "todos";
+        const orig = iocOrigin?.value || "todos";
+        let visiveis = 0;
+
+        iocsTbody.querySelectorAll("tr").forEach(tr => {
+            const texto = tr.textContent.toLowerCase();
+            const rowTipo = tr.dataset.iocType || "";
+            const rowSev = tr.dataset.iocSev || "";
+            const rowOrig = tr.dataset.iocOrigin || "";
+
+            const match =
+                (!termo || texto.includes(termo)) &&
+                (tipo === "todos" || rowTipo === tipo) &&
+                (sev === "todos" || rowSev === sev) &&
+                (orig === "todos" || rowOrig === orig);
+
+            tr.hidden = !match;
+            if (match) visiveis++;
+        });
+
+        if (iocPageInfo) {
+            iocPageInfo.textContent = `Exibindo ${visiveis} indicador(es) · Página 1 de 1`;
+        }
+    };
+
+    [iocSearch, iocType, iocSev, iocOrigin].forEach(el => {
+        if (el) {
+            el.addEventListener("input", filtrarIocs);
+            el.addEventListener("change", filtrarIocs);
+        }
+    });
+
+    if (iocsTbody) {
+        iocsTbody.addEventListener("click", event => {
+            const btn = event.target.closest(".ioc-copy-btn");
+            if (!btn) return;
+            const val = btn.dataset.iocVal || "";
+            if (navigator.clipboard && val) {
+                navigator.clipboard.writeText(val).catch(() => {});
+            }
+            notifyView(`IoC copiado: ${val}`);
+        });
+    }
+
+    // --- Novo Relatório ---
+    const nrForm = document.getElementById("novoRelatorioForm");
+    const nrIocList = document.getElementById("nrIocList");
+    const nrAddIocBtn = document.getElementById("nrAddIocBtn");
+
+    if (nrAddIocBtn && nrIocList) {
+        nrAddIocBtn.addEventListener("click", () => {
+            const tipo = document.getElementById("nrIocTipo").value;
+            const valor = document.getElementById("nrIocValor").value.trim();
+            if (!valor) return notifyView("Informe o valor do IoC antes de adicionar.");
+
+            const li = document.createElement("li");
+            li.innerHTML = `<span><strong>[${tipo}]</strong> <code>${valor}</code></span><button type="button" class="btn-table">Remover</button>`;
+            li.querySelector("button").addEventListener("click", () => li.remove());
+            nrIocList.appendChild(li);
+            document.getElementById("nrIocValor").value = "";
+        });
+    }
+
+    const nrAnexoInput = document.getElementById("nrAnexoInput");
+    const nrAnexoLabel = document.getElementById("nrAnexoLabel");
+    if (nrAnexoInput && nrAnexoLabel) {
+        nrAnexoInput.addEventListener("change", () => {
+            const file = nrAnexoInput.files?.[0];
+            nrAnexoLabel.textContent = file
+                ? `Arquivo selecionado: ${file.name}`
+                : "Arraste evidências (.pcap, .json, .pdf, .log) ou clique para selecionar";
+        });
+    }
+
+    const salvarRascunhoBtn = document.getElementById("nrSalvarRascunho");
+    if (salvarRascunhoBtn) {
+        salvarRascunhoBtn.addEventListener("click", () => {
+            const statusEl = document.getElementById("nrStatusLabel");
+            if (statusEl) statusEl.textContent = "Rascunho Salvo";
+            notifyView("Rascunho salvo localmente.");
+        });
+    }
+
+    if (nrForm) {
+        nrForm.addEventListener("submit", e => {
+            e.preventDefault();
+            const titulo = document.getElementById("nrTitulo").value.trim();
+            const severidade = document.getElementById("nrSeveridade").value;
+            const resumo = document.getElementById("nrResumo").value.trim();
+            if (!titulo || !resumo) return notifyView("Preencha o título e o resumo executivo.");
+
+            const grid = document.getElementById("relatoriosGrid");
+            if (grid) {
+                const codigo = `REL-2026-0${Math.floor(91 + Math.random() * 8)}`;
+                const card = document.createElement("article");
+                card.className = "biblioteca-card";
+                card.innerHTML = `
+                    <div class="card-title"><i class="fa-regular fa-file-lines"></i><h2>${codigo} · ${titulo}</h2></div>
+                    <p>${resumo}</p>
+                    <div class="card-info"><span>SEVERIDADE: ${severidade.toUpperCase()}</span><span class="status approved">Publicado</span></div>
+                    <div class="card-footer"><span>Autor: Analista SOC L3 · ${nrIocList?.children.length || 0} IoCs vinculados</span></div>`;
+                grid.prepend(card);
+            }
+
+            nrForm.reset();
+            if (nrIocList) nrIocList.innerHTML = "";
+            if (nrAnexoLabel) {
+                nrAnexoLabel.textContent = "Arraste evidências (.pcap, .json, .pdf, .log) ou clique para selecionar";
+            }
+            notifyView("Relatório publicado na Biblioteca!");
+            abrirView("relatorios");
+        });
+    }
+});
+
