@@ -9,14 +9,14 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-   <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <script src="theme.js"></script>
 </head>
 
 <body>
 
-   <header class="topbar">
+    <header class="topbar">
         <div class="topbar__left">
             <button id="toggleSidebar" class="hamburger-btn" aria-label="Alternar menu">
                 <span></span>
@@ -33,9 +33,9 @@
         </div>
 
         <div class="topbar__right">
-            <button class="notif-btn" aria-label="Notificações">
+            <button type="button" class="notif-btn" aria-label="Notificações">
                 <svg width="12" height="15" viewBox="0 0 12 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0 12.75V11.25H1.5V6C1.5 4.9625 1.8125 4.04063 2.4375 3.23438C3.0625 2.42812 3.875 1.9 4.875 1.65V1.125C4.875 0.8125 4.98438 0.546875 5.20312 0.328125C5.42188 0.109375 5.6875 0 6 0C6.3125 0 6.57812 0.109375 6.79688 0.328125C7.01562 0.546875 7.125 0.8125 7.125 1.125V1.65C8.125 1.9 8.9375 2.42812 9.5625 3.23438C10.1875 4.04063 10.5 4.9625 10.5 6V11.25H12V12.75H0V12.75M6 7.125V7.125V7.125V7.125V7.125V7.125V7.125V7.125V7.125M6 15C5.5875 15 5.23438 14.8531 4.94063 14.5594C4.64688 14.2656 4.5 13.9125 4.5 13.5H7.5C7.5 13.9125 7.35312 14.2656 7.05937 14.5594C6.76562 14.8531 6.4125 15 6 15V15M3 11.25H9V6C9 5.175 8.70625 4.46875 8.11875 3.88125C7.53125 3.29375 6.825 3 6 3C5.175 3 4.46875 3.29375 3.88125 3.88125C3.29375 4.46875 3 5.175 3 6V11.25V11.25" fill="#B8A8D0"/>
+                    <path d="M0 12.75V11.25H1.5V6C1.5 4.9625 1.8125 4.04063 2.4375 3.23438C3.0625 2.42812 3.875 1.9 4.875 1.65V1.125C4.875 0.8125 4.98438 0.546875 5.20312 0.328125C5.42188 0.109375 5.6875 0 6 0C6.3125 0 6.57812 0.109375 6.79688 0.328125C7.01562 0.546875 7.125 0.8125 7.125 1.125V1.65C8.125 1.9 8.9375 2.42812 9.5625 3.23438C10.1875 4.04063 10.5 4.9625 10.5 6V11.25H12V12.75H0V12.75M6 7.125V7.125V7.125V7.125V7.125V7.125V7.125V7.125V7.125M6 15C5.5875 15 5.23438 14.8531 4.94063 14.5594C4.64688 14.2656 4.5 13.9125 4.5 13.5H7.5C7.5 13.9125 7.35312 14.2656 7.05937 14.5594C6.76562 14.8531 6.4125 15 6 15V15M3 11.25H9V6C9 5.175 8.70625 4.46875 8.11875 3.88125C7.53125 3.29375 6.825 3 6 3C5.175 3 4.46875 3.29375 3.88125 3.88125C3.29375 4.46875 3 5.175 3 6V11.25V11.25" fill="#B8A8D0"/>
                 </svg>
                 <span class="badge"></span>
             </button>
@@ -52,33 +52,52 @@
     <!-- LAYOUT -->
     <div class="layout">
 
-       <aside id="sidebar" class="sidebar">
+        <aside id="sidebar" class="sidebar">
             <nav class="sidebar__nav">
                 <a href="index.html" class="sidebar__item">
-                <span class="icon">
-                    <svg width="18" height="17" viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M17.6267 8.36353L9.95503 0.695931L9.4408 0.181714C9.32364 0.065323 9.16519 0 9.00004 0C8.83488 0 8.67644 0.065323 8.55927 0.181714L0.373343 8.36353C0.253286 8.48312 0.158403 8.62554 0.0942952 8.7824C0.0301869 8.93926 -0.0018477 9.10737 8.22954e-05 9.27681C0.00802401 9.97567 0.589755 10.5336 1.28863 10.5336H2.13243V17H15.8676V10.5336H16.7293C17.0688 10.5336 17.3885 10.4005 17.6287 10.1603C17.747 10.0424 17.8407 9.9022 17.9045 9.74782C17.9682 9.59344 18.0007 9.42795 18 9.26093C18 8.92341 17.867 8.60376 17.6267 8.36353ZM10.1119 15.5705H7.88819V11.5203H10.1119V15.5705ZM14.4381 9.10408V15.5705H11.3826V11.0438C11.3826 10.605 11.0272 10.2497 10.5884 10.2497H7.41169C6.97291 10.2497 6.61752 10.605 6.61752 11.0438V15.5705H3.56194V9.10408H1.65593L9.00202 1.76407L9.46066 2.2227L16.3461 9.10408H14.4381Z" fill="#A855F7"/>
-                    </svg>
-                 </span>
-                   <span class="label">Início</span>
+                    <span class="icon">
+                        <svg width="18" height="17" viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17.6267 8.36353L9.95503 0.695931L9.4408 0.181714C9.32364 0.065323 9.16519 0 9.00004 0C8.83488 0 8.67644 0.065323 8.55927 0.181714L0.373343 8.36353C0.253286 8.48312 0.158403 8.62554 0.0942952 8.7824C0.0301869 8.93926 -0.0018477 9.10737 8.22954e-05 9.27681C0.00802401 9.97567 0.589755 10.5336 1.28863 10.5336H2.13243V17H15.8676V10.5336H16.7293C17.0688 10.5336 17.3885 10.4005 17.6287 10.1603C17.747 10.0424 17.8407 9.9022 17.9045 9.74782C17.9682 9.59344 18.0007 9.42795 18 9.26093C18 8.92341 17.867 8.60376 17.6267 8.36353ZM10.1119 15.5705H7.88819V11.5203H10.1119V15.5705ZM14.4381 9.10408V15.5705H11.3826V11.0438C11.3826 10.605 11.0272 10.2497 10.5884 10.2497H7.41169C6.97291 10.2497 6.61752 10.605 6.61752 11.0438V15.5705H3.56194V9.10408H1.65593L9.00202 1.76407L9.46066 2.2227L16.3461 9.10408H14.4381Z" fill="#A855F7"/>
+                        </svg>
+                    </span>
+                    <span class="label">Início</span>
                 </a>
 
                 <a href="dashboard.html" class="sidebar__item">
                     <span class="icon">
                         <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M8.33333 5V0H15V5H8.33333V5M0 8.33333V0H6.66667V8.33333H0V8.33333M8.33333 15V6.66667H15V15H8.33333V15M0 15V10H6.66667V15H0V15M1.66667 6.66667H5V1.66667H1.66667V6.66667V6.66667M10 13.3333H13.3333V8.33333H10V13.3333V13.3333M10 3.33333H13.3333V1.66667H10V3.33333V3.33333M1.66667 13.3333H5V11.6667H1.66667V13.3333V13.3333M5 6.66667V6.66667V6.66667V6.66667V6.66667V6.66667M10 3.33333V3.33333V3.33333V3.33333V3.33333V3.33333M10 8.33333V8.33333V8.33333V8.33333V8.33333V8.33333M5 11.6667V11.6667V11.6667V11.6667V11.6667V11.6667" fill="#70648C"/>
+                            <path d="M8.33333 5V0H15V5H8.33333V5M0 8.33333V0H6.66667V8.33333H0V8.33333M8.33333 15V6.66667H15V15H8.33333V15M0 15V10H6.66667V15H0V15M1.66667 6.66667H5V1.66667H1.66667V6.66667V6.66667M10 13.3333H13.3333V8.33333H10V13.3333V13.3333M10 3.33333H13.3333V1.66667H10V3.33333V3.33333M1.66667 13.3333H5V11.6667H1.66667V13.3333V13.3333M5 6.66667V6.66667V6.66667V6.66667V6.66667V6.66667M10 3.33333V3.33333V3.33333V3.33333V3.33333V3.33333M10 8.33333V8.33333V8.33333V8.33333V8.33333V8.33333M5 11.6667V11.6667V11.6667V11.6667V11.6667V11.6667" fill="#70648C"/>
                         </svg>
                     </span>
                     <span class="label">Dashboard</span>
                 </a>
-                <a href="biblioteca.html" class="sidebar__item active">
-                    <span class="icon">
-                        <svg width="14" height="17" viewBox="0 0 14 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M3.33333 13.3333H10V11.6667H3.33333V13.3333V13.3333M3.33333 10H10V8.33333H3.33333V10V10M1.66667 16.6667C1.20833 16.6667 0.815972 16.5035 0.489583 16.1771C0.163194 15.8507 0 15.4583 0 15V1.66667C0 1.20833 0.163194 0.815972 0.489583 0.489583C0.815972 0.163194 1.20833 0 1.66667 0H8.33333L13.3333 5V15C13.3333 15.4583 13.1701 15.8507 12.8438 16.1771C12.5174 16.5035 12.125 16.6667 11.6667 16.6667H1.66667V16.6667M7.5 5.83333V1.66667H1.66667V1.66667V1.66667V15V15V15H11.6667V15V15V5.83333H7.5V5.83333M1.66667 1.66667V1.66667V5.83333V5.83333V1.66667V5.83333V5.83333V15V15V15V15V15V15V1.66667V1.66667V1.66667V1.66667" fill="#70648C"/>
-                        </svg>
-                    </span>
-                    <span class="label">Biblioteca</span>
-                </a>
+
+                <div class="sidebar__group">
+                    <button type="button" class="sidebar__item active" data-bib-view="visao-geral">
+                        <span class="icon">
+                            <svg width="14" height="17" viewBox="0 0 14 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3.33333 13.3333H10V11.6667H3.33333V13.3333V13.3333M3.33333 10H10V8.33333H3.33333V10V10M1.66667 16.6667C1.20833 16.6667 0.815972 16.5035 0.489583 16.1771C0.163194 15.8507 0 15.4583 0 15V1.66667C0 1.20833 0.163194 0.815972 0.489583 0.489583C0.815972 0.163194 1.20833 0 1.66667 0H8.33333L13.3333 5V15C13.3333 15.4583 13.1701 15.8507 12.8438 16.1771C12.5174 16.5035 12.125 16.6667 11.6667 16.6667H1.66667V16.6667M7.5 5.83333V1.66667H1.66667V1.66667V1.66667V15V15V15H11.6667V15V15V5.83333H7.5V5.83333M1.66667 1.66667V1.66667V5.83333V5.83333V1.66667V5.83333V5.83333V15V15V15V15V15V15V1.66667V1.66667V1.66667V1.66667" fill="#70648C"/>
+                            </svg>
+                        </span>
+                        <span class="label">Biblioteca</span>
+                    </button>
+
+                    <div class="sidebar__submenu" aria-label="Submenu da Biblioteca">
+                        <button type="button" class="sidebar__subitem" data-bib-view="relatorios">
+                            <i class="fa-regular fa-file-lines"></i>
+                            <span>Relatórios</span>
+                        </button>
+                        <button type="button" class="sidebar__subitem" data-bib-view="timeline">
+                            <i class="fa-solid fa-chart-line"></i>
+                            <span>Timeline</span>
+                        </button>
+                        <button type="button" class="sidebar__subitem" data-bib-view="iocs">
+                            <i class="fa-solid fa-fingerprint"></i>
+                            <span>IoCs</span>
+                        </button>
+                    </div>
+                </div>
+
                 <a href="#assistente" class="sidebar__item">
                     <span class="icon">
                         <img src="assets/icones/icone_sona.svg" alt="Assistente Sona" width="19" height="19">
@@ -91,7 +110,7 @@
                 <a href="#perfil" class="sidebar__item">
                     <span class="icon">
                         <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M6 6C5.175 6 4.46875 5.70625 3.88125 5.11875C3.29375 4.53125 3 3.825 3 3C3 2.175 3.29375 1.46875 3.88125 0.88125C4.46875 0.29375 5.175 0 6 0C6.825 0 7.53125 0.29375 8.11875 0.88125C8.70625 1.46875 9 2.175 9 3C9 3.825 8.70625 4.53125 8.11875 5.11875C7.53125 5.70625 6.825 6 6 6V6M0 12V9.9C0 9.475 0.109375 9.08437 0.328125 8.72812C0.546875 8.37187 0.8375 8.1 1.2 7.9125C1.975 7.525 2.7625 7.23438 3.5625 7.04063C4.3625 6.84688 5.175 6.75 6 6.75C6.825 6.75 7.6375 6.84688 8.4375 7.04063C9.2375 7.23438 10.025 7.525 10.8 7.9125C11.1625 8.1 11.4531 8.37187 11.6719 8.72812C11.8906 9.08437 12 9.475 12 9.9V12H0V12M1.5 10.5H10.5V9.9C10.5 9.7625 10.4656 9.6375 10.3969 9.525C10.3281 9.4125 10.2375 9.325 10.125 9.2625C9.45 8.925 8.76875 8.67188 8.08125 8.50313C7.39375 8.33438 6.7 8.25 6 8.25C5.3 8.25 4.60625 8.33438 3.91875 8.50313C3.23125 8.67188 2.55 8.925 1.875 9.2625C1.7625 9.325 1.67188 9.4125 1.60312 9.525C1.53437 9.6375 1.5 9.7625 1.5 9.9V10.5V10.5M6 4.5C6.4125 4.5 6.76562 4.35312 7.05937 4.05937C7.35312 3.76562 7.5 3.4125 7.5 3C7.5 2.5875 7.35312 2.23438 7.05937 1.94062C6.76562 1.64687 6.4125 1.5 6 1.5C5.5875 1.5 5.23438 1.64687 4.94063 1.94062C4.64688 2.23438 4.5 2.5875 4.5 3C4.5 3.4125 4.64688 3.76562 4.94063 4.05937C5.23438 4.35312 5.5875 4.5 6 4.5V4.5M6 3V3V3V3V3V3V3V3V3V3M6 10.5V10.5V10.5V10.5V10.5V10.5V10.5V10.5V10.5V10.5V10.5V10.5V10.5" fill="#2E1F44"/>
+                            <path d="M6 6C5.175 6 4.46875 5.70625 3.88125 5.11875C3.29375 4.53125 3 3.825 3 3C3 2.175 3.29375 1.46875 3.88125 0.88125C4.46875 0.29375 5.175 0 6 0C6.825 0 7.53125 0.29375 8.11875 0.88125C8.70625 1.46875 9 2.175 9 3C9 3.825 8.70625 4.53125 8.11875 5.11875C7.53125 5.70625 6.825 6 6 6V6M0 12V9.9C0 9.475 0.109375 9.08437 0.328125 8.72812C0.546875 8.37187 0.8375 8.1 1.2 7.9125C1.975 7.525 2.7625 7.23438 3.5625 7.04063C4.3625 6.84688 5.175 6.75 6 6.75C6.825 6.75 7.6375 6.84688 8.4375 7.04063C9.2375 7.23438 10.025 7.525 10.8 7.9125C11.1625 8.1 11.4531 8.37187 11.6719 8.72812C11.8906 9.08437 12 9.475 12 9.9V12H0V12M1.5 10.5H10.5V9.9C10.5 9.7625 10.4656 9.6375 10.3969 9.525C10.3281 9.4125 10.2375 9.325 10.125 9.2625C9.45 8.925 8.76875 8.67188 8.08125 8.50313C7.39375 8.33438 6.7 8.25 6 8.25C5.3 8.25 4.60625 8.33438 3.91875 8.50313C3.23125 8.67188 2.55 8.925 1.875 9.2625C1.7625 9.325 1.67188 9.4125 1.60312 9.525C1.53437 9.6375 1.5 9.7625 1.5 9.9V10.5V10.5M6 4.5C6.4125 4.5 6.76562 4.35312 7.05937 4.05937C7.35312 3.76562 7.5 3.4125 7.5 3C7.5 2.5875 7.35312 2.23438 7.05937 1.94062C6.76562 1.64687 6.4125 1.5 6 1.5C5.5875 1.5 5.23438 1.64687 4.94063 1.94062C4.64688 2.23438 4.5 2.5875 4.5 3C4.5 3.4125 4.64688 3.76562 4.94063 4.05937C5.23438 4.35312 5.5875 4.5 6 4.5V4.5M6 3V3V3V3V3V3V3V3V3V3M6 10.5V10.5V10.5V10.5V10.5V10.5V10.5V10.5V10.5V10.5V10.5V10.5V10.5" fill="#2E1F44"/>
                         </svg>
                     </span>
                     <span class="label">Perfil</span>
@@ -104,193 +123,573 @@
         </aside>
 
         <!-- CONTEÚDO PRINCIPAL -->
-        <main class="main-content">
+        <main class="main-content" id="bibliotecaApp">
 
-            <!-- CABEÇALHO -->
-            <section class="biblioteca-header">
-                <div>
-                    <h1>Biblioteca Operacional</h1>
-                    <p>
-                        Acesse e gerencie o repositório de inteligência:
-                        relatórios de ameaças, timeline cronológica de
-                        incidentes e base ativa de indicadores de
-                        comprometimento (IoCs).
-                    </p>
-                </div>
-
-                <button type="button" id="btnFiltrosBib" class="btn-filtros">
-                    <i class="fa-solid fa-sliders"></i>
-                    Filtros
-                </button>
-            </section>
-
-            <!-- CARDS PRINCIPAIS -->
-            <section class="biblioteca-cards">
-
-                <!-- TIMELINE -->
-                <article class="biblioteca-card">
-                    <div class="card-title">
-                        <i class="fa-solid fa-chart-line"></i>
-                        <h2>Timeline de Incidentes</h2>
-                    </div>
-
-                    <p>
-                        Visualização cronológica unificada de eventos
-                        de segurança, correlação de logs e histórico
-                        forense de ataques.
-                    </p>
-
-                    <div class="card-info">
-                        <span>FEED TELEMETRICO</span>
-                        <strong>Sync contínua</strong>
-                    </div>
-
-                    <div class="card-footer">
-                        <span>3 incidentes em curso</span>
-                    </div>
-
-                    <a href="#atividadesBiblioteca" data-filtro-rapido="Timeline" class="card-action">
-                        Abrir Linha do Tempo
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </a>
-                </article>
-
-                <!-- IOCS -->
-                <article class="biblioteca-card">
-                    <div class="card-title">
-                        <i class="fa-solid fa-fingerprint"></i>
-                        <h2>Base de IoCs</h2>
-                    </div>
-
-                    <p>
-                        Catálogo centralizado de Indicadores de
-                        Comprometimento: hashes maliciosos,
-                        endereços IP suspeitos e domínios C2.
-                    </p>
-
-                    <div class="card-info">
-                        <span>DISTRIBUIÇÃO DE RISCO</span>
-                        <strong>137 IoCs ativos</strong>
-                    </div>
-
-                    <div class="card-footer">
-                        <span>8 de risco crítico</span>
-                    </div>
-
-                    <a href="#atividadesBiblioteca" data-filtro-rapido="IoCs" class="card-action">
-                        Consultar IoCs
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </a>
-                </article>
-
-                <!-- RELATÓRIOS -->
-                <article class="biblioteca-card">
-                    <div class="card-title">
-                        <i class="fa-regular fa-file-lines"></i>
-                        <h2>Relatórios</h2>
-                    </div>
-
-                    <p>
-                        Dossiês técnicos, análises de campanhas de
-                        phishing, malware e relatórios executivos
-                        exportáveis em PDF/CSV.
-                    </p>
-
-                    <div class="card-info">
-                        <span>CADÊNCIA MENSAL</span>
-                        <strong>14 emitidos</strong>
-                    </div>
-
-                    <div class="card-footer">
-                        <span>2 pendentes de aprovação</span>
-                    </div>
-
-                    <a href="#atividadesBiblioteca" data-filtro-rapido="Relatórios" class="card-action">
-                        Acessar Relatórios
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </a>
-                </article>
-
-            </section>
-
-            <!-- ATIVIDADES RECENTES -->
-            <section id="atividadesBiblioteca" class="atividades-container">
-
-                <div class="atividades-header">
+            <!-- =========================================================
+                 VIEW 1: VISÃO GERAL DA BIBLIOTECA
+            ========================================================== -->
+            <div id="view-visao-geral" class="bib-view">
+                <section class="biblioteca-header">
                     <div>
-                        <h2>Atividades Recentes na Biblioteca</h2>
+                        <h1>Biblioteca Operacional</h1>
                         <p>
-                            Trilha de auditoria e enriquecimento
-                            forense em tempo real
+                            Acesse e gerencie o repositório de inteligência:
+                            relatórios de ameaças, timeline cronológica de
+                            incidentes e base ativa de indicadores de
+                            comprometimento (IoCs).
                         </p>
                     </div>
 
-                    <div class="atividades-tabs" role="tablist" aria-label="Filtrar atividades">
-                        <button type="button" class="tab active" data-bib-tab="todos">Todos (28)</button>
-                        <button type="button" class="tab" data-bib-tab="relatorios">Relatórios</button>
-                        <button type="button" class="tab" data-bib-tab="timeline">Timeline</button>
-                        <button type="button" class="tab" data-bib-tab="iocs">IoCs</button>
+                    <div class="biblioteca-header-actions">
+                        <button type="button" class="btn-filtros" data-bib-view="novo-relatorio">
+                            <i class="fa-solid fa-plus"></i>
+                            Novo relatório
+                        </button>
                     </div>
-                </div>
+                </section>
 
-                <!-- TABELA -->
-                <div class="tabela-wrapper">
-                    <table class="atividades-table">
-                        <thead>
-                            <tr>
-                                <th>Módulo / Vetor</th>
-                                <th>Artefato / Descrição</th>
-                                <th>Gravidade / Status</th>
-                                <th>Analista SOC</th>
-                                <th>Carimbo (UTC)</th>
-                                <th>Ação rápida</th>
-                            </tr>
-                        </thead>
+                <section class="biblioteca-cards">
+                    <article class="biblioteca-card">
+                        <div class="card-title">
+                            <i class="fa-solid fa-chart-line"></i>
+                            <h2>Timeline de Incidentes</h2>
+                        </div>
+                        <p>
+                            Visualização cronológica unificada de eventos
+                            de segurança, correlação de logs e histórico
+                            forense de ataques.
+                        </p>
+                        <div class="card-info">
+                            <span>FEED TELEMETRICO</span>
+                            <strong>Sync contínua</strong>
+                        </div>
+                        <div class="card-footer">
+                            <span>3 incidentes em curso</span>
+                        </div>
+                        <button type="button" class="card-action-btn" data-bib-view="timeline">
+                            Abrir Linha do Tempo
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </article>
 
-                        <tbody id="bibliotecaTbody">
-                            <tr data-categoria="iocs">
-                                <td>Base IoC</td>
-                                <td>194.38.29.142 [C2 Cobalt Strike]</td>
-                                <td><span class="status critical">Crítico</span></td>
-                                <td>J. Silva (L3)</td>
-                                <td>10:42:18</td>
-                                <td>
-                                    <button type="button" class="btn-table">Investigar</button>
-                                </td>
-                            </tr>
+                    <article class="biblioteca-card">
+                        <div class="card-title">
+                            <i class="fa-solid fa-fingerprint"></i>
+                            <h2>Base de IoCs</h2>
+                        </div>
+                        <p>
+                            Catálogo centralizado de Indicadores de
+                            Comprometimento: hashes maliciosos,
+                            endereços IP suspeitos e domínios C2.
+                        </p>
+                        <div class="card-info">
+                            <span>DISTRIBUIÇÃO DE RISCO</span>
+                            <strong>137 IoCs ativos</strong>
+                        </div>
+                        <div class="card-footer">
+                            <span>8 de risco crítico</span>
+                        </div>
+                        <button type="button" class="card-action-btn" data-bib-view="iocs">
+                            Consultar IoCs
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </article>
 
-                            <tr data-categoria="relatorios">
-                                <td>Relatórios</td>
-                                <td>REL-2024-089: Vetor Phishing QR-Code</td>
-                                <td><span class="status approved">Aprovado</span></td>
-                                <td>M. Castro (L2)</td>
-                                <td>09:15:02</td>
-                                <td>
-                                    <button type="button" class="btn-table">Exportar PDF</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                    <article class="biblioteca-card">
+                        <div class="card-title">
+                            <i class="fa-regular fa-file-lines"></i>
+                            <h2>Relatórios</h2>
+                        </div>
+                        <p>
+                            Dossiês técnicos, análises de campanhas de
+                            phishing, malware e relatórios executivos
+                            exportáveis em PDF/CSV.
+                        </p>
+                        <div class="card-info">
+                            <span>CADÊNCIA MENSAL</span>
+                            <strong>14 emitidos</strong>
+                        </div>
+                        <div class="card-footer">
+                            <span>2 pendentes de aprovação</span>
+                        </div>
+                        <button type="button" class="card-action-btn" data-bib-view="relatorios">
+                            Acessar Relatórios
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </article>
+                </section>
 
-                <!-- RODAPÉ DA TABELA -->
-                <div class="atividades-footer">
-                    <span id="bibliotecaContador">
-                        Exibindo 2 de 1.482 registros de telemetria catalogados
-                    </span>
+                <section id="atividadesBiblioteca" class="atividades-container">
+                    <div class="atividades-header">
+                        <div>
+                            <h2>Atividades Recentes na Biblioteca</h2>
+                            <p>Trilha de auditoria e enriquecimento forense em tempo real</p>
+                        </div>
 
+                        <div class="atividades-tabs" role="tablist" aria-label="Filtrar atividades">
+                            <button type="button" class="tab active" data-bib-tab="todos">Todos (28)</button>
+                            <button type="button" class="tab" data-bib-tab="relatorios">Relatórios</button>
+                            <button type="button" class="tab" data-bib-tab="timeline">Timeline</button>
+                            <button type="button" class="tab" data-bib-tab="iocs">IoCs</button>
+                        </div>
+                    </div>
+
+                    <div class="tabela-wrapper">
+                        <table class="atividades-table">
+                            <thead>
+                                <tr>
+                                    <th>Módulo / Vetor</th>
+                                    <th>Artefato / Descrição</th>
+                                    <th>Gravidade / Status</th>
+                                    <th>Analista SOC</th>
+                                    <th>Carimbo (UTC)</th>
+                                    <th>Ação rápida</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="bibliotecaTbody">
+                                <tr data-categoria="iocs">
+                                    <td>Base IoC</td>
+                                    <td>194.38.29.142 [C2 Cobalt Strike]</td>
+                                    <td><span class="status critical">Crítico</span></td>
+                                    <td>J. Silva (L3)</td>
+                                    <td>10:42:18</td>
+                                    <td><button type="button" class="btn-table">Investigar</button></td>
+                                </tr>
+                                <tr data-categoria="relatorios">
+                                    <td>Relatórios</td>
+                                    <td>REL-2024-089: Vetor Phishing QR-Code</td>
+                                    <td><span class="status approved">Aprovado</span></td>
+                                    <td>M. Castro (L2)</td>
+                                    <td>09:15:02</td>
+                                    <td><button type="button" class="btn-table">Exportar PDF</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="atividades-footer">
+                        <span id="bibliotecaContador">Exibindo 2 de 1.482 registros de telemetria catalogados</span>
+                        <div>
+                            <button type="button" id="exportJsonBib" class="btn-secondary">Exportar Trilha (JSON)</button>
+                            <button type="button" id="loadMoreBib" class="btn-primary">Carregar Histórico Completo</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- =========================================================
+                 VIEW 2: TIMELINE DE ATIVIDADES
+            ========================================================== -->
+            <div id="view-timeline" class="bib-view" hidden>
+                <section class="biblioteca-header">
                     <div>
-                        <button type="button" id="exportJsonBib" class="btn-secondary">
-                            Exportar Trilha (JSON)
+                        <button type="button" class="bib-back-link" data-bib-view="visao-geral">
+                            <i class="fa-solid fa-arrow-left"></i> Voltar à Biblioteca
                         </button>
-
-                        <button type="button" id="loadMoreBib" class="btn-primary">
-                            Carregar Histórico Completo
-                        </button>
+                        <h1>Timeline de Atividades</h1>
+                        <p>Histórico de eventos, análises e alertas detectados no sistema.</p>
                     </div>
-                </div>
 
-            </section>
+                    <div class="atividades-tabs" id="timelineFilters">
+                        <button type="button" class="tab active" data-tl-filter="todos">Todos</button>
+                        <button type="button" class="tab" data-tl-filter="alerta">Alertas</button>
+                        <button type="button" class="tab" data-tl-filter="analise">Análises</button>
+                        <button type="button" class="tab" data-tl-filter="erro">Erros</button>
+                    </div>
+                </section>
+
+                <section class="timeline-feed" id="timelineFeed">
+                    <article class="timeline-item" data-tl-type="alerta">
+                        <div class="tl-badge danger"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                        <div class="tl-body">
+                            <div class="tl-meta">
+                                <span>14:32:05 · Hoje</span>
+                                <span class="status critical">Crítico</span>
+                            </div>
+                            <h3>Alerta de Malware Detectado</h3>
+                            <p>Arquivo <code>suspicious_activity.exe</code> foi detectado e bloqueado em quarentena pelo módulo Sona.</p>
+                            <div class="tl-tags">
+                                <span>Origem: IP 192.168.1.189</span>
+                                <span>Usuário: analista.soc</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="timeline-item" data-tl-type="analise">
+                        <div class="tl-badge info"><i class="fa-solid fa-file-shield"></i></div>
+                        <div class="tl-body">
+                            <div class="tl-meta">
+                                <span>11:18:20 · Hoje</span>
+                                <span class="status approved">Sucesso</span>
+                            </div>
+                            <h3>Análise de Arquivo Concluída</h3>
+                            <p>Relatório gerado para a URL desofuscada <code>hxxps://malicious-domain.com</code>. Nenhum gatilho severo encontrado.</p>
+                            <div class="tl-tags">
+                                <span>ID: #74827</span>
+                                <span>Por: Ana SOC L3</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="timeline-item" data-tl-type="erro">
+                        <div class="tl-badge warning"><i class="fa-solid fa-shield-halved"></i></div>
+                        <div class="tl-body">
+                            <div class="tl-meta">
+                                <span>09:45:12 · Ontem</span>
+                                <span class="status warning">Médio</span>
+                            </div>
+                            <h3>Tentativa de Login Bloqueada</h3>
+                            <p>Múltiplas tentativas falhas de login registradas em um curto período para a conta <code>admin</code>.</p>
+                            <div class="tl-tags">
+                                <span>Localização: Desconhecida</span>
+                                <span>Bloqueio temporário ativo</span>
+                            </div>
+                        </div>
+                    </article>
+                </section>
+
+                <div class="timeline-more-wrap">
+                    <button type="button" id="loadMoreTimeline" class="btn-secondary">
+                        <i class="fa-solid fa-chevron-down"></i> Carregar mais eventos
+                    </button>
+                </div>
+            </div>
+
+            <!-- =========================================================
+                 VIEW 3: BASE DE IOCS
+            ========================================================== -->
+            <div id="view-iocs" class="bib-view" hidden>
+                <section class="biblioteca-header">
+                    <div>
+                        <button type="button" class="bib-back-link" data-bib-view="visao-geral">
+                            <i class="fa-solid fa-arrow-left"></i> Voltar à Biblioteca
+                        </button>
+                        <span class="bib-eyebrow">REPOSITÓRIO DE INTELIGÊNCIA</span>
+                        <h1>Base de IoCs</h1>
+                        <p>Consulte e gerencie indicadores de comprometimento catalogados pela equipe SOC e feeds de telemetria ativa.</p>
+                    </div>
+                </section>
+
+                <section class="ioc-stats-grid" aria-label="Resumo da Base de IoCs">
+                    <article class="ioc-stat-card">
+                        <div class="ioc-stat-top">
+                            <span>IOCS MONITORADOS</span>
+                            <i class="fa-solid fa-fingerprint"></i>
+                        </div>
+                        <strong>4.289</strong>
+                        <small>+142 hoje</small>
+                    </article>
+
+                    <article class="ioc-stat-card">
+                        <div class="ioc-stat-top">
+                            <span>COM RISCO CRÍTICO</span>
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                        </div>
+                        <strong class="danger-num">612</strong>
+                        <small>15 ativos na rede</small>
+                    </article>
+
+                    <article class="ioc-stat-card">
+                        <div class="ioc-stat-top">
+                            <span>FEEDS CONECTADOS</span>
+                            <i class="fa-solid fa-tower-broadcast"></i>
+                        </div>
+                        <strong>19</strong>
+                        <small>Sincronização ativa</small>
+                    </article>
+
+                    <article class="ioc-stat-card">
+                        <div class="ioc-stat-top">
+                            <span>TAXA DE DETECÇÃO</span>
+                            <i class="fa-solid fa-shield-check"></i>
+                        </div>
+                        <strong>98.4%</strong>
+                        <small>Média de correlação</small>
+                    </article>
+                </section>
+
+                <section class="atividades-container">
+                    <div class="ioc-filters-bar">
+                        <input type="search" id="iocSearchInput" class="bib-input ioc-search-grow" placeholder="Buscar hash, IP, domínio ou ID...">
+
+                        <select id="iocTypeFilter" class="bib-select" aria-label="Filtrar por tipo">
+                            <option value="todos">Tipo: Todos</option>
+                            <option value="Hash">Hash</option>
+                            <option value="IP">IP</option>
+                            <option value="Domínio">Domínio</option>
+                        </select>
+
+                        <select id="iocSeverityFilter" class="bib-select" aria-label="Filtrar por severidade">
+                            <option value="todos">Risco: Todos</option>
+                            <option value="Crítico">Crítico</option>
+                            <option value="Alto">Alto</option>
+                            <option value="Médio">Médio</option>
+                        </select>
+
+                        <select id="iocOriginFilter" class="bib-select" aria-label="Filtrar por origem">
+                            <option value="todos">Origem: Todas</option>
+                            <option value="Equipe SOC">Equipe SOC</option>
+                            <option value="Feed Externo">Feed Externo</option>
+                        </select>
+                    </div>
+
+                    <div class="tabela-wrapper">
+                        <table class="atividades-table">
+                            <thead>
+                                <tr>
+                                    <th>IoC / Valor</th>
+                                    <th>Tipo</th>
+                                    <th>Risco / Severidade</th>
+                                    <th>Origem</th>
+                                    <th>Última ocorrência</th>
+                                    <th>Ação</th>
+                                </tr>
+                            </thead>
+                            <tbody id="iocsTbody">
+                                <tr data-ioc-type="Hash" data-ioc-sev="Crítico" data-ioc-origin="Equipe SOC">
+                                    <td class="mono-cell">8f14e45fceea167a5a36dedd4bea2543</td>
+                                    <td>Hash</td>
+                                    <td><span class="status critical">Crítico</span></td>
+                                    <td>Equipe SOC</td>
+                                    <td>Hoje, 10:42</td>
+                                    <td>
+                                        <button type="button" class="btn-table ioc-copy-btn" data-ioc-val="8f14e45fceea167a5a36dedd4bea2543" title="Copiar IoC">
+                                            <i class="fa-regular fa-copy"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr data-ioc-type="IP" data-ioc-sev="Alto" data-ioc-origin="Feed Externo">
+                                    <td class="mono-cell">185.220.101.42</td>
+                                    <td>IP</td>
+                                    <td><span class="status warning">Alto</span></td>
+                                    <td>Feed Externo</td>
+                                    <td>Hoje, 08:19</td>
+                                    <td>
+                                        <button type="button" class="btn-table ioc-copy-btn" data-ioc-val="185.220.101.42" title="Copiar IoC">
+                                            <i class="fa-regular fa-copy"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr data-ioc-type="Domínio" data-ioc-sev="Médio" data-ioc-origin="Equipe SOC">
+                                    <td class="mono-cell">cdn-update-servico.test</td>
+                                    <td>Domínio</td>
+                                    <td><span class="status approved">Médio</span></td>
+                                    <td>Equipe SOC</td>
+                                    <td>Ontem, 21:05</td>
+                                    <td>
+                                        <button type="button" class="btn-table ioc-copy-btn" data-ioc-val="cdn-update-servico.test" title="Copiar IoC">
+                                            <i class="fa-regular fa-copy"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr data-ioc-type="Hash" data-ioc-sev="Crítico" data-ioc-origin="Feed Externo">
+                                    <td class="mono-cell">44d88612fea8a8f36de82e1278abb02f</td>
+                                    <td>Hash</td>
+                                    <td><span class="status critical">Crítico</span></td>
+                                    <td>Feed Externo</td>
+                                    <td>20/11</td>
+                                    <td>
+                                        <button type="button" class="btn-table ioc-copy-btn" data-ioc-val="44d88612fea8a8f36de82e1278abb02f" title="Copiar IoC">
+                                            <i class="fa-regular fa-copy"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="ioc-pagination">
+                        <button type="button" id="iocPrevPage" class="btn-secondary">Anterior</button>
+                        <span id="iocPageInfo">Página 1 de 1</span>
+                        <button type="button" id="iocNextPage" class="btn-secondary">Próxima</button>
+                    </div>
+                </section>
+            </div>
+
+            <!-- =========================================================
+                 VIEW 4: RELATÓRIOS
+            ========================================================== -->
+            <div id="view-relatorios" class="bib-view" hidden>
+                <section class="biblioteca-header">
+                    <div>
+                        <button type="button" class="bib-back-link" data-bib-view="visao-geral">
+                            <i class="fa-solid fa-arrow-left"></i> Voltar à Biblioteca
+                        </button>
+                        <h1>Relatórios de Inteligência</h1>
+                        <p>Dossiês técnicos, análises de incidentes e relatórios executivos emitidos pela equipe SOC.</p>
+                    </div>
+
+                    <button type="button" class="btn-primary" data-bib-view="novo-relatorio">
+                        <i class="fa-solid fa-plus"></i> Novo relatório
+                    </button>
+                </section>
+
+                <section class="relatorios-grid" id="relatoriosGrid">
+                    <article class="biblioteca-card">
+                        <div class="card-title">
+                            <i class="fa-regular fa-file-lines"></i>
+                            <h2>REL-2026-089 · Phishing QR-Code</h2>
+                        </div>
+                        <p>Análise técnica de campanha de engenharia social direcionada ao setor financeiro utilizando redirecionamento dinâmico.</p>
+                        <div class="card-info">
+                            <span>SEVERIDADE: ALTA</span>
+                            <span class="status approved">Publicado</span>
+                        </div>
+                        <div class="card-footer">
+                            <span>Autor: M. Castro (L2) · 4 IoCs vinculados</span>
+                        </div>
+                    </article>
+
+                    <article class="biblioteca-card">
+                        <div class="card-title">
+                            <i class="fa-regular fa-file-lines"></i>
+                            <h2>REL-2026-090 · Infraestrutura C2</h2>
+                        </div>
+                        <p>Mapeamento de servidores de comando e controle associados a tráfego anômalo de saída na sub-rede corporativa.</p>
+                        <div class="card-info">
+                            <span>SEVERIDADE: CRÍTICA</span>
+                            <span class="status critical">Em Revisão</span>
+                        </div>
+                        <div class="card-footer">
+                            <span>Autor: J. Silva (L3) · 7 IoCs vinculados</span>
+                        </div>
+                    </article>
+                </section>
+            </div>
+
+            <!-- =========================================================
+                 VIEW 5: NOVO RELATÓRIO
+            ========================================================== -->
+            <div id="view-novo-relatorio" class="bib-view" hidden>
+                <section class="biblioteca-header">
+                    <div>
+                        <button type="button" class="bib-back-link" data-bib-view="relatorios">
+                            <i class="fa-solid fa-arrow-left"></i> Voltar para Relatórios
+                        </button>
+                        <h1>Novo relatório</h1>
+                        <p>Registre uma análise ou incidente no repositório de inteligência operacional.</p>
+                    </div>
+                </section>
+
+                <form id="novoRelatorioForm" class="novo-relatorio-grid">
+                    <div class="nr-col-main">
+                        <article class="nr-card">
+                            <h2><i class="fa-solid fa-circle-info"></i> Informações gerais</h2>
+
+                            <div class="nr-field">
+                                <label for="nrTitulo">Título do relatório *</label>
+                                <input type="text" id="nrTitulo" class="bib-input" required placeholder="Ex.: Análise de Campanha Phishing — Credenciais O365">
+                            </div>
+
+                            <div class="nr-row-2">
+                                <div class="nr-field">
+                                    <label for="nrCategoria">Tipo de relatório</label>
+                                    <select id="nrCategoria" class="bib-select">
+                                        <option value="Análise de Ameaça">Análise de Ameaça</option>
+                                        <option value="Incidente SOC">Incidente SOC</option>
+                                        <option value="Boletim de Vulnerabilidade">Boletim de Vulnerabilidade</option>
+                                        <option value="Relatório Executivo">Relatório Executivo</option>
+                                    </select>
+                                </div>
+
+                                <div class="nr-field">
+                                    <label for="nrSeveridade">Severidade</label>
+                                    <select id="nrSeveridade" class="bib-select">
+                                        <option value="Crítica">Crítica</option>
+                                        <option value="Alta" selected>Alta</option>
+                                        <option value="Média">Média</option>
+                                        <option value="Baixa">Baixa</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="nr-field">
+                                <label for="nrTags">Tags / MITRE ATT&amp;CK</label>
+                                <input type="text" id="nrTags" class="bib-input" placeholder="Ex.: T1566, Phishing, C2, Ransomware">
+                            </div>
+                        </article>
+
+                        <article class="nr-card">
+                            <h2><i class="fa-solid fa-align-left"></i> Resumo e análise</h2>
+
+                            <div class="nr-field">
+                                <label for="nrResumo">Resumo executivo *</label>
+                                <textarea id="nrResumo" class="bib-textarea" rows="3" required placeholder="Descreva objetivamente o impacto, vetor inicial e escopo da ameaça..."></textarea>
+                            </div>
+
+                            <div class="nr-field">
+                                <label for="nrDetalhes">Conteúdo técnico da análise</label>
+                                <textarea id="nrDetalhes" class="bib-textarea" rows="5" placeholder="Detalhe a linha do tempo técnica, comportamento do artefato e recomendações de mitigação..."></textarea>
+                            </div>
+                        </article>
+
+                        <article class="nr-card">
+                            <h2><i class="fa-solid fa-fingerprint"></i> Indicadores de comprometimento (IoCs)</h2>
+                            <div class="nr-ioc-adder">
+                                <select id="nrIocTipo" class="bib-select">
+                                    <option value="IP">IP</option>
+                                    <option value="SHA-256">SHA-256</option>
+                                    <option value="Domínio">Domínio</option>
+                                    <option value="URL">URL</option>
+                                </select>
+                                <input type="text" id="nrIocValor" class="bib-input" placeholder="Cole o IP, hash ou domínio...">
+                                <button type="button" id="nrAddIocBtn" class="btn-secondary">Adicionar</button>
+                            </div>
+                            <ul id="nrIocList" class="nr-ioc-list"></ul>
+                        </article>
+
+                        <article class="nr-card">
+                            <h2><i class="fa-solid fa-paperclip"></i> Anexos e evidências</h2>
+                            <label class="nr-dropzone" for="nrAnexoInput">
+                                <i class="fa-solid fa-cloud-arrow-up"></i>
+                                <span id="nrAnexoLabel">Arraste evidências (.pcap, .json, .pdf, .log) ou clique para selecionar</span>
+                                <input type="file" id="nrAnexoInput" hidden>
+                            </label>
+                        </article>
+                    </div>
+
+                    <div class="nr-col-side">
+                        <article class="nr-card">
+                            <h2><i class="fa-solid fa-paper-plane"></i> Publicação</h2>
+                            <div class="nr-meta-list">
+                                <div><span>Autor</span><strong id="nrAutorNome">Analista SOC L3</strong></div>
+                                <div><span>Status</span><strong id="nrStatusLabel">Novo Rascunho</strong></div>
+                                <div><span>Classificação</span><strong>TLP:AMBER</strong></div>
+                            </div>
+                        </article>
+
+                        <article class="nr-card">
+                            <h2><i class="fa-solid fa-eye"></i> Visibilidade</h2>
+                            <label class="nr-radio">
+                                <input type="radio" name="nrVisibilidade" value="Equipe SOC" checked>
+                                <span>Toda a equipe SOC (L1–L3)</span>
+                            </label>
+                            <label class="nr-radio">
+                                <input type="radio" name="nrVisibilidade" value="Restrito L3">
+                                <span>Restrito à liderança / CSIRT</span>
+                            </label>
+                        </article>
+
+                        <article class="nr-card">
+                            <h2><i class="fa-solid fa-shield-halved"></i> Boas práticas</h2>
+                            <ul class="nr-tips">
+                                <li>Desofusque URLs maliciosas (<code>hxxps://</code>) antes de publicar.</li>
+                                <li>Vincule ao menos um IoC validado quando a severidade for Alta ou Crítica.</li>
+                                <li>Inclua ações claras de contenção e bloqueio.</li>
+                            </ul>
+                        </article>
+                    </div>
+
+                    <div class="nr-actions-bar">
+                        <button type="button" class="btn-secondary" data-bib-view="relatorios">Cancelar</button>
+                        <div>
+                            <button type="button" id="nrSalvarRascunho" class="btn-secondary">Salvar rascunho</button>
+                            <button type="submit" class="btn-primary">Publicar relatório</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
 
         </main>
     </div>
