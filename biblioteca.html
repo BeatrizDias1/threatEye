@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ThreatEye - Biblioteca Operacional</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+        <div class="topbar__left">
+            <button id="toggleSidebar" class="hamburger-btn" aria-label="Alternar menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <div class="brand">
+                <div class="brand__icon">◎</div>
+                <div class="brand__text">
+                    <strong>THREATEYE</strong>
+                    <span>CYBER INTEL SOC</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="topbar__right">
+            <button class="notif-btn" aria-label="Notificações">
+                <i class="fa-regular fa-bell"></i>
+                <span class="badge"></span>
+            </button>
+
+            <div class="user-profile">
+                <div class="user-avatar">👤</div>
+                <div class="user-info">
+                    <strong>Analista SOC L3</strong>
+                    <span>cyber.ops@threateye.io</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- LAYOUT -->
+    <div class="layout">
+
+        <!-- SIDEBAR -->
+        <aside id="sidebar" class="sidebar">
+            <nav class="sidebar__nav">
+                <a href="index.html" class="sidebar__item">
+                    <i class="fa-solid fa-house"></i>
+                    <span class="label">Início</span>
+                </a>
+
+                <a href="dashboard.html" class="sidebar__item">
+                    <i class="fa-solid fa-table-cells-large"></i>
+                    <span class="label">Dashboard</span>
+                </a>
+
+                <a href="biblioteca.html" class="sidebar__item active">
+                    <i class="fa-solid fa-book"></i>
+                    <span class="label">Biblioteca</span>
+                </a>
+
+                <a href="dashboard.html#sona" class="sidebar__item">
+                    <i class="fa-solid fa-robot"></i>
+                    <span class="label">Assistente Sona</span>
+                </a>
+            </nav>
+
+            <div class="sidebar__footer">
+                <a href="configuracoes.html" class="sidebar__item">
+                    <i class="fa-solid fa-user"></i>
+                    <span class="label">Perfil</span>
+                </a>
+
+                <a href="configuracoes.html" class="sidebar__item">
+                    <i class="fa-solid fa-gear"></i>
+                    <span class="label">Configurações</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- CONTEÚDO PRINCIPAL -->
+        <main class="main-content">
+
+            <!-- CABEÇALHO -->
+            <section class="biblioteca-header">
+                <div>
+                    <h1>Biblioteca Operacional</h1>
+                    <p>
+                        Acesse e gerencie o repositório de inteligência:
+                        relatórios de ameaças, timeline cronológica de
+                        incidentes e base ativa de indicadores de
+                        comprometimento (IoCs).
+                    </p>
+                </div>
+
+                <button type="button" id="btnFiltrosBib" class="btn-filtros">
+                    <i class="fa-solid fa-sliders"></i>
+                    Filtros
+                </button>
+            </section>
+
+            <!-- CARDS PRINCIPAIS -->
+            <section class="biblioteca-cards">
+
+                <!-- TIMELINE -->
+                <article class="biblioteca-card">
+                    <div class="card-title">
+                        <i class="fa-solid fa-chart-line"></i>
+                        <h2>Timeline de Incidentes</h2>
+                    </div>
+
+                    <p>
+                        Visualização cronológica unificada de eventos
+                        de segurança, correlação de logs e histórico
+                        forense de ataques.
+                    </p>
+
+                    <div class="card-info">
+                        <span>FEED TELEMETRICO</span>
+                        <strong>Sync contínua</strong>
+                    </div>
+
+                    <div class="card-footer">
+                        <span>3 incidentes em curso</span>
+                    </div>
+
+                    <a href="#atividadesBiblioteca" data-filtro-rapido="Timeline" class="card-action">
+                        Abrir Linha do Tempo
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </article>
+
+                <!-- IOCS -->
+                <article class="biblioteca-card">
+                    <div class="card-title">
+                        <i class="fa-solid fa-fingerprint"></i>
+                        <h2>Base de IoCs</h2>
+                    </div>
+
+                    <p>
+                        Catálogo centralizado de Indicadores de
+                        Comprometimento: hashes maliciosos,
+                        endereços IP suspeitos e domínios C2.
+                    </p>
+
+                    <div class="card-info">
+                        <span>DISTRIBUIÇÃO DE RISCO</span>
+                        <strong>137 IoCs ativos</strong>
+                    </div>
+
+                    <div class="card-footer">
+                        <span>8 de risco crítico</span>
+                    </div>
+
+                    <a href="#atividadesBiblioteca" data-filtro-rapido="IoCs" class="card-action">
+                        Consultar IoCs
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </article>
+
+                <!-- RELATÓRIOS -->
+                <article class="biblioteca-card">
+                    <div class="card-title">
+                        <i class="fa-regular fa-file-lines"></i>
+                        <h2>Relatórios</h2>
+                    </div>
+
+                    <p>
+                        Dossiês técnicos, análises de campanhas de
+                        phishing, malware e relatórios executivos
+                        exportáveis em PDF/CSV.
+                    </p>
+
+                    <div class="card-info">
+                        <span>CADÊNCIA MENSAL</span>
+                        <strong>14 emitidos</strong>
+                    </div>
+
+                    <div class="card-footer">
+                        <span>2 pendentes de aprovação</span>
+                    </div>
+
+                    <a href="#atividadesBiblioteca" data-filtro-rapido="Relatórios" class="card-action">
+                        Acessar Relatórios
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </article>
+
+            </section>
+
+            <!-- ATIVIDADES RECENTES -->
+            <section id="atividadesBiblioteca" class="atividades-container">
+
+                <div class="atividades-header">
+                    <div>
+                        <h2>Atividades Recentes na Biblioteca</h2>
+                        <p>
+                            Trilha de auditoria e enriquecimento
+                            forense em tempo real
+                        </p>
+                    </div>
+
+                    <div class="atividades-tabs" role="tablist" aria-label="Filtrar atividades">
+                        <button type="button" class="tab active" data-bib-tab="todos">Todos (28)</button>
+                        <button type="button" class="tab" data-bib-tab="relatorios">Relatórios</button>
+                        <button type="button" class="tab" data-bib-tab="timeline">Timeline</button>
+                        <button type="button" class="tab" data-bib-tab="iocs">IoCs</button>
+                    </div>
+                </div>
+
+                <!-- TABELA -->
+                <div class="tabela-wrapper">
+                    <table class="atividades-table">
+                        <thead>
+                            <tr>
+                                <th>Módulo / Vetor</th>
+                                <th>Artefato / Descrição</th>
+                                <th>Gravidade / Status</th>
+                                <th>Analista SOC</th>
+                                <th>Carimbo (UTC)</th>
+                                <th>Ação rápida</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="bibliotecaTbody">
+                            <tr data-categoria="iocs">
+                                <td>Base IoC</td>
+                                <td>194.38.29.142 [C2 Cobalt Strike]</td>
+                                <td><span class="status critical">Crítico</span></td>
+                                <td>J. Silva (L3)</td>
+                                <td>10:42:18</td>
+                                <td>
+                                    <button type="button" class="btn-table">Investigar</button>
+                                </td>
+                            </tr>
+
+                            <tr data-categoria="relatorios">
+                                <td>Relatórios</td>
+                                <td>REL-2024-089: Vetor Phishing QR-Code</td>
+                                <td><span class="status approved">Aprovado</span></td>
+                                <td>M. Castro (L2)</td>
+                                <td>09:15:02</td>
+                                <td>
+                                    <button type="button" class="btn-table">Exportar PDF</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- RODAPÉ DA TABELA -->
+                <div class="atividades-footer">
+                    <span id="bibliotecaContador">
+                        Exibindo 2 de 1.482 registros de telemetria catalogados
+                    </span>
+
+                    <div>
+                        <button type="button" id="exportJsonBib" class="btn-secondary">
+                            Exportar Trilha (JSON)
+                        </button>
+
+                        <button type="button" id="loadMoreBib" class="btn-primary">
+                            Carregar Histórico Completo
+                        </button>
+                    </div>
+                </div>
+
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Script global -->
+    <script src="script.js"></script>
+</body>
+
+</html>
