@@ -786,3 +786,179 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
+// ==========================================
+// 8. ASSISTENTE SONA
+// ==========================================
+document.addEventListener("DOMContentLoaded", () => {
+    const sonaApp = document.getElementById("sonaApp");
+    if (!sonaApp) return;
+
+    const form = document.getElementById("sonaForm");
+    const input = document.getElementById("sonaInput");
+    const hero = document.getElementById("sonaHero");
+    const messages = document.getElementById("sonaMessages");
+    const composer = document.getElementById("sonaComposer");
+    const errorBanner = document.getElementById("sonaErrorBanner");
+    const errorText = document.getElementById("sonaErrorText");
+    const editLinkBtn = document.getElementById("sonaEditLinkBtn");
+    const undoBtn = document.getElementById("sonaUndoBtn");
+    const closeErrorBtn = document.getElementById("sonaCloseErrorBtn");
+    const resetBtn = document.getElementById("sonaResetBtn");
+    const fileInput = document.getElementById("sonaFileInput");
+    const fileTag = document.getElementById("sonaAttachedName");
+    const urlModeBtn = document.getElementById("sonaUrlModeBtn");
+
+    let ultimoEnvio = "";
+
+    const parecerUrlValida = valor => {
+        const texto = valor.trim();
+        if (!texto) return true;
+        const pareceLink =
+            texto.startsWith("http://") ||
+            texto.startsWith("https://") ||
+            texto.startsWith("www.") ||
+            texto.includes("://") ||
+            (/\.[a-z]{2,}(\/|$|\s)/i.test(texto) && !texto.includes(" "));
+
+        if (!pareceLink) return true;
+
+        try {
+            const urlObj = new URL(texto);
+            return (urlObj.protocol === "http:" || urlObj.protocol === "https:") && urlObj.hostname.includes(".");
+        } catch {
+            return false;
+        }
+    };
+
+    const limparErro = () => {
+        if (errorBanner) errorBanner.hidden = true;
+        if (composer) composer.classList.remove("has-error");
+    };
+
+    const mostrarErroUrl = valor => {
+        if (errorText) {
+            errorText.innerHTML = `Não foi possível iniciar a análise para <code>${valor}</code>. Certifique-se de incluir o protocolo completo (ex.: <code>https://exemplo.com</code>).`;
+        }
+        if (errorBanner) errorBanner.hidden = false;
+        if (composer) composer.classList.add("has-error");
+    };
+
+    const adicionarMensagem = (texto, autor = "bot") => {
+        if (!messages) return;
+        if (hero) hero.hidden = true;
+        const bolha = document.createElement("div");
+        bolha.className = `sona-msg ${autor}`;
+        bolha.innerHTML = texto;
+        messages.appendChild(bolha);
+        bolha.scrollIntoView({ behavior: "smooth", block: "end" });
+    };
+
+    document.querySelectorAll("[data-sona-prompt]").forEach(card => {
+        card.addEventListener("click", () => {
+            if (!input) return;
+            input.value = card.dataset.sonaPrompt || "";
+            input.focus();
+            limparErro();
+        });
+    });
+
+    if (fileInput && fileTag) {
+        fileInput.addEventListener("change", () => {
+            const file = fileInput.files?.[0];
+            if (file) {
+                fileTag.textContent = file.name;
+                fileTag.hidden = false;
+            } else {
+                fileTag.textContent = "";
+                fileTag.hidden = true;
+            }
+        });
+    }
+
+    if (urlModeBtn && input) {
+        urlModeBtn.addEventListener("click", () => {
+            if (!input.value.trim()) {
+                input.value = "https://";
+                input.focus();
+                return;
+            }
+            if (!parecerUrlValida(input.value)) {
+                mostrarErroUrl(input.value.trim());
+            } else {
+                limparErro();
+            }
+        });
+    }
+
+    if (editLinkBtn && input) {
+        editLinkBtn.addEventListener("click", () => {
+            limparErro();
+            input.focus();
+        });
+    }
+
+    if (undoBtn && input) {
+        undoBtn.addEventListener("click", () => {
+            input.value = ultimoEnvio;
+            limparErro();
+            input.focus();
+        });
+    }
+
+    if (closeErrorBtn) {
+        closeErrorBtn.addEventListener("click", limparErro);
+    }
+
+    if (resetBtn) {
+        resetBtn.addEventListener("click", () => {
+            limparErro();
+            if (messages) messages.innerHTML = "";
+            if (hero) hero.hidden = false;
+            if (input) input.value = "";
+            if (fileInput) fileInput.value = "";
+            if (fileTag) {
+                fileTag.textContent = "";
+                fileTag.hidden = true;
+            }
+        });
+    }
+
+    if (form && input) {
+        form.addEventListener("submit", e => {
+            e.preventDefault();
+            const valor = input.value.trim();
+            const anexo = fileInput?.files?.[0]?.name || "";
+
+            if (!valor && !anexo) return;
+
+            ultimoEnvio = valor;
+
+            if (valor && !parecerUrlValida(valor)) {
+                mostrarErroUrl(valor);
+                return;
+            }
+
+            limparErro();
+
+            const resumoUsuario = [
+                valor ? `<span>${valor}</span>` : "",
+                anexo ? `<div><code>Anexo: ${anexo}</code></div>` : ""
+            ].filter(Boolean).join("");
+
+            adicionarMensagem(resumoUsuario, "user");
+
+            const alvo = valor || anexo;
+            adicionarMensagem(
+                `Análise iniciada para <code>${alvo}</code>. Verificando cabeçalhos HTTP, exposição de rotas, indicadores suspeitos e pontos de falha para consolidar o diagnóstico.`,
+                "bot"
+            );
+
+            input.value = "";
+            if (fileInput) fileInput.value = "";
+            if (fileTag) {
+                fileTag.textContent = "";
+                fileTag.hidden = true;
+            }
+        });
+    }
+});
