@@ -682,3 +682,304 @@ html[data-density="compacto"] td{padding:5px 0}
 .btn-ghost.danger{color:#e11d48;border-color:rgba(225,29,72,.5)}
 .btn-ghost.danger:hover{background:rgba(225,29,72,.12)}
 @media(max-width:900px){.set-grid{grid-template-columns:1fr}.theme-opts{grid-template-columns:1fr}.two{grid-template-columns:1fr}}
+
+/* ================= BIBLIOTECA OPERACIONAL ================= */
+.biblioteca-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+}
+
+.biblioteca-header h1 {
+    font-size: 28px;
+    margin-bottom: 6px;
+}
+
+.biblioteca-header p {
+    color: var(--text-muted);
+    font-size: 14px;
+    max-width: 720px;
+    line-height: 1.5;
+}
+
+.btn-filtros {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg-dark);
+    color: var(--text-main);
+    border: 1px solid var(--border-glass);
+    border-radius: 10px;
+    padding: 10px 16px;
+    font: 500 12px inherit;
+    font-family: inherit;
+    cursor: pointer;
+    transition: border-color 0.2s, background-color 0.2s;
+}
+
+.btn-filtros:hover {
+    border-color: var(--accent-purple);
+    background-color: var(--bg-hover);
+}
+
+.biblioteca-cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.biblioteca-card {
+    background: var(--bg-dark);
+    border: 1px solid var(--border-glass);
+    border-radius: 16px;
+    padding: 20px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 14px;
+}
+
+.biblioteca-card .card-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.biblioteca-card .card-title i {
+    color: var(--accent-light);
+    font-size: 16px;
+}
+
+.biblioteca-card .card-title h2 {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.biblioteca-card > p {
+    color: var(--text-muted);
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.biblioteca-card .card-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: var(--inset);
+    border: 1px solid var(--line);
+}
+
+.biblioteca-card .card-info span {
+    font-size: 10px;
+    color: var(--text-muted);
+    letter-spacing: 0.4px;
+}
+
+.biblioteca-card .card-info strong {
+    font-size: 12px;
+    color: var(--text-main);
+}
+
+.biblioteca-card .card-footer {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.biblioteca-card .card-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--accent-light);
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    margin-top: 2px;
+}
+
+.biblioteca-card .card-action:hover {
+    text-decoration: underline;
+}
+
+.atividades-container {
+    background: var(--bg-dark);
+    border: 1px solid var(--border-glass);
+    border-radius: 18px;
+    padding: 20px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.atividades-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+}
+
+.atividades-header h2 {
+    font-size: 18px;
+    margin-bottom: 4px;
+}
+
+.atividades-header p {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.atividades-tabs {
+    display: flex;
+    gap: 6px;
+    padding: 5px;
+    background: var(--inset);
+    border-radius: 12px;
+    overflow-x: auto;
+    max-width: 100%;
+}
+
+/* Escopado apenas às abas da biblioteca para não afetar configurações */
+.atividades-tabs .tab {
+    padding: 7px 13px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    background: none;
+    color: var(--text-muted);
+    font: 500 11px inherit;
+    font-family: inherit;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.atividades-tabs .tab:hover {
+    color: var(--text-main);
+}
+
+.atividades-tabs .tab.active {
+    background: rgba(var(--accent-rgb), 0.25);
+    border-color: rgba(var(--accent-rgb), 0.5);
+    color: var(--text-main);
+}
+
+.tabela-wrapper {
+    overflow-x: auto;
+}
+
+.atividades-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    min-width: 680px;
+}
+
+.atividades-table th {
+    text-align: left;
+    color: var(--text-muted);
+    font-weight: 500;
+    font-size: 10px;
+    letter-spacing: 0.5px;
+    padding: 8px 10px 12px;
+    border-bottom: 1px solid var(--line);
+}
+
+.atividades-table td {
+    padding: 12px 10px;
+    border-bottom: 1px solid var(--line);
+    color: var(--text-main);
+}
+
+.status {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: 600;
+    border: 1px solid transparent;
+}
+
+.status.critical {
+    color: #ff9db3;
+    background: rgba(255, 107, 138, 0.16);
+    border-color: rgba(255, 107, 138, 0.55);
+}
+
+.status.approved {
+    color: #3ddc97;
+    background: rgba(61, 220, 151, 0.14);
+    border-color: rgba(61, 220, 151, 0.45);
+}
+
+html[data-theme="light"] .status.critical {
+    color: #be185d;
+}
+
+html[data-theme="light"] .status.approved {
+    color: #047857;
+}
+
+.btn-table {
+    background: rgba(var(--accent-rgb), 0.18);
+    color: var(--text-main);
+    border: 1px solid var(--border-glass);
+    border-radius: 8px;
+    padding: 6px 12px;
+    font: 500 11px inherit;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.btn-table:hover {
+    background: var(--accent-purple);
+    border-color: var(--accent-purple);
+    color: #fff;
+}
+
+.atividades-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.atividades-footer > div {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--text-main);
+    border: 1px solid var(--border-glass);
+    border-radius: 8px;
+    padding: 9px 16px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-secondary:hover {
+    background: rgba(var(--accent-rgb), 0.14);
+}
+
+@media (max-width: 1024px) {
+    .biblioteca-cards {
+        grid-template-columns: 1fr;
+    }
+}
