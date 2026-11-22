@@ -983,3 +983,58 @@ html[data-theme="light"] .status.approved {
         grid-template-columns: 1fr;
     }
 }
+
+/* ================= TEMA BRANCO / CLARO NA BIBLIOTECA ================= */
+html[data-theme="light"] .biblioteca-card,
+html[data-theme="light"] .atividades-container,
+html[data-theme="light"] .btn-filtros {
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.86),
+        rgba(246, 239, 255, 0.72)
+    );
+    border-color: rgba(var(--accent-rgb), 0.24);
+    color: var(--text-main);
+    box-shadow:
+        0 12px 32px rgba(30, 22, 44, 0.08),
+        inset 0 1px 1px rgba(255, 255, 255, 0.9);
+}
+
+html[data-theme="light"] .btn-filtros:hover {
+    background-color: var(--bg-hover, #efe4ff);
+    border-color: var(--accent-purple);
+}
+
+html[data-theme="light"] .biblioteca-card .card-info,
+html[data-theme="light"] .atividades-tabs {
+    background: rgba(var(--accent-rgb), 0.06);
+    border-color: rgba(30, 22, 44, 0.1);
+}
+
+html[data-theme="light"] .atividades-table th {
+    color: var(--text-muted);
+    border-bottom-color: rgba(30, 22, 44, 0.1);
+}
+
+html[data-theme="light"] .atividades-table td {
+    color: var(--text-main);
+    border-bottom-color: rgba(30, 22, 44, 0.1);
+}
+
+html[data-theme="light"] .btn-secondary,
+html[data-theme="light"] .btn-table {
+    color: var(--text-main);
+    border-color: rgba(var(--accent-rgb), 0.28);
+}
+
+html[data-theme="light"] .status.critical {
+    color: #be185d;
+    background: rgba(190, 24, 93, 0.1);
+    border-color: rgba(190, 24, 93, 0.35);
+}
+
+html[data-theme="light"] .status.approved {
+    color: #047857;
+    background: rgba(4, 120, 87, 0.1);
+    border-color: rgba(4, 120, 87, 0.35);
+}
