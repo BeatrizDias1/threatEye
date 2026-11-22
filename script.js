@@ -413,3 +413,168 @@ document.addEventListener("DOMContentLoaded", () => {
         window.location.href = "login.html";
     });
 });
+
+// ==========================================
+// 6. LÓGICA DA BIBLIOTECA (biblioteca.html)
+// ==========================================
+document.addEventListener("DOMContentLoaded", () => {
+    const bibSection = document.querySelector(".atividades-container");
+    const tbody = document.getElementById("bibliotecaTbody");
+    if (!bibSection || !tbody) return;
+
+    const sessao = JSON.parse(sessionStorage.getItem("usuarioLogado") || "null");
+    if (sessao) {
+        const info = document.querySelectorAll(".user-info strong, .user-info span");
+        if (info.length === 2) {
+            info[0].textContent = sessao.nome;
+            info[1].textContent = sessao.email;
+        }
+    }
+
+    const toast = document.querySelector(".toast") || (() => {
+        const el = document.createElement("div");
+        el.className = "toast";
+        document.body.appendChild(el);
+        return el;
+    })();
+
+    let toastTimer;
+    const notifyBib = msg => {
+        toast.textContent = msg;
+        toast.classList.add("show");
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toast.classList.remove("show"), 2200);
+    };
+
+    const registrosExtras = [
+        {
+            categoria: "timeline",
+            modulo: "Timeline",
+            artefato: "INC-2026-104: Movimento lateral SMB detetado",
+            statusClasse: "critical",
+            statusTexto: "Em análise",
+            analista: "R. Lima (L3)",
+            hora: "08:51:40",
+            acao: "Ver Linha"
+        },
+        {
+            categoria: "iocs",
+            modulo: "Base IoC",
+            artefato: "9b74c9a1...e04d [SHA-256 Loader]",
+            statusClasse: "approved",
+            statusTexto: "Catalogado",
+            analista: "A. Souza (L2)",
+            hora: "07:29:11",
+            acao: "Investigar"
+        }
+    ];
+
+    const tabs = bibSection.querySelectorAll(".atividades-tabs .tab[data-bib-tab]");
+    const contador = document.getElementById("bibliotecaContador");
+
+    const atualizarContador = () => {
+        if (!contador) return;
+        const todas = [...tbody.querySelectorAll("tr")];
+        const visiveis = todas.filter(tr => !tr.hidden).length;
+        contador.textContent = `Exibindo ${visiveis} de ${todas.length} registros carregados (base: 1.482 catalogados)`;
+    };
+
+    const aplicarFiltro = categoria => {
+        tabs.forEach(btn => btn.classList.toggle("active", btn.dataset.bibTab === categoria));
+        tbody.querySelectorAll("tr").forEach(tr => {
+            const cat = tr.dataset.categoria || "";
+            tr.hidden = categoria !== "todos" && cat !== categoria;
+        });
+        atualizarContador();
+    };
+
+    tabs.forEach(btn => {
+        btn.addEventListener("click", () => aplicarFiltro(btn.dataset.bibTab));
+    });
+
+    document.querySelectorAll("[data-filtro-rapido]").forEach(link => {
+        link.addEventListener("click", () => {
+            const alvo = link.dataset.filtroRapido.toLowerCase();
+            if (alvo.includes("ioc")) aplicarFiltro("iocs");
+            else if (alvo.includes("relat")) aplicarFiltro("relatorios");
+            else if (alvo.includes("time")) aplicarFiltro("timeline");
+            else aplicarFiltro("todos");
+        });
+    });
+
+    const loadMoreBtn = document.getElementById("loadMoreBib");
+    if (loadMoreBtn) {
+        loadMoreBtn.addEventListener("click", () => {
+            if (loadMoreBtn.dataset.loaded === "1") {
+                notifyBib("Histórico adicional já carregado.");
+                return;
+            }
+
+            registrosExtras.forEach(item => {
+                const tr = document.createElement("tr");
+                tr.dataset.categoria = item.categoria;
+                tr.innerHTML = `
+                    <td>${item.modulo}</td>
+                    <td>${item.artefato}</td>
+                    <td><span class="status ${item.statusClasse}">${item.statusTexto}</span></td>
+                    <td>${item.analista}</td>
+                    <td>${item.hora}</td>
+                    <td><button type="button" class="btn-table">${item.acao}</button></td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            loadMoreBtn.dataset.loaded = "1";
+            loadMoreBtn.textContent = "Histórico Carregado";
+            const abaAtiva = bibSection.querySelector(".atividades-tabs .tab.active")?.dataset.bibTab || "todos";
+            aplicarFiltro(abaAtiva);
+            notifyBib("Novos registros adicionados à visualização.");
+        });
+    }
+
+    const exportJsonBtn = document.getElementById("exportJsonBib");
+    if (exportJsonBtn) {
+        exportJsonBtn.addEventListener("click", () => {
+            const linhasVisiveis = [...tbody.querySelectorAll("tr")].filter(tr => !tr.hidden);
+            const payload = linhasVisiveis.map(tr => {
+                const cols = tr.querySelectorAll("td");
+                return {
+                    modulo: cols[0]?.textContent.trim() || "",
+                    artefato: cols[1]?.textContent.trim() || "",
+                    status: cols[2]?.textContent.trim() || "",
+                    analista: cols[3]?.textContent.trim() || "",
+                    carimboUtc: cols[4]?.textContent.trim() || ""
+                };
+            });
+
+            const blob = new Blob([JSON.stringify({ exportadoEm: new Date().toISOString(), registros: payload }, null, 2)], {
+                type: "application/json"
+            });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "trilha-biblioteca-threateye.json";
+            a.click();
+            URL.revokeObjectURL(url);
+            notifyBib("Trilha exportada em JSON.");
+        });
+    }
+
+    tbody.addEventListener("click", event => {
+        const btn = event.target.closest(".btn-table");
+        if (!btn) return;
+        const linha = btn.closest("tr");
+        const artefato = linha?.children[1]?.textContent.trim() || "registro";
+        notifyBib(`${btn.textContent.trim()}: ${artefato}`);
+    });
+
+    const filtrosBtn = document.getElementById("btnFiltrosBib");
+    if (filtrosBtn) {
+        filtrosBtn.addEventListener("click", () => {
+            bibSection.scrollIntoView({ behavior: "smooth", block: "start" });
+            notifyBib("Use as abas para filtrar por IoCs, Relatórios ou Timeline.");
+        });
+    }
+
+    atualizarContador();
+});
