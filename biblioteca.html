@@ -10,21 +10,24 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <script src="theme.js"></script>
 </head>
 
 <body>
+    <a class="skip-link" href="#bibliotecaApp">Pular para o conteúdo</a>
 
     <header class="topbar">
         <div class="topbar__left">
-            <button id="toggleSidebar" class="hamburger-btn" aria-label="Alternar menu">
+            <button id="toggleSidebar" class="hamburger-btn" aria-label="Alternar menu" aria-controls="sidebar" aria-expanded="false">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
             <div class="brand">
-                <div class="brand__icon">◎</div>
+                <div class="brand__icon">
+                    <img src="./assets/icones/logo.svg" alt="Logo ThreatEye">
+                </div>
                 <div class="brand__text">
                     <strong>THREATEYE</strong>
                     <span>CYBER INTEL SOC</span>
@@ -40,7 +43,9 @@
                 <span class="badge"></span>
             </button>
             <a href="login.html" class="user-profile" style="text-decoration: none; color: inherit;">
-                <div class="user-avatar">👤</div>
+               <div class="user-avatar">
+                     <img src="./assets/icones/perfil.svg" alt="Icone de perfil">
+                </div>
                 <div class="user-info">
                     <strong>Analista SOC L3</strong>
                     <span>cyber.ops@threateye.io</span>
@@ -73,7 +78,7 @@
                 </a>
 
                 <div class="sidebar__group">
-                    <button type="button" class="sidebar__item active" data-bib-view="visao-geral">
+                    <button type="button" class="sidebar__item active" aria-current="page" data-bib-view="visao-geral">
                         <span class="icon">
                             <svg width="14" height="17" viewBox="0 0 14 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M3.33333 13.3333H10V11.6667H3.33333V13.3333V13.3333M3.33333 10H10V8.33333H3.33333V10V10M1.66667 16.6667C1.20833 16.6667 0.815972 16.5035 0.489583 16.1771C0.163194 15.8507 0 15.4583 0 15V1.66667C0 1.20833 0.163194 0.815972 0.489583 0.489583C0.815972 0.163194 1.20833 0 1.66667 0H8.33333L13.3333 5V15C13.3333 15.4583 13.1701 15.8507 12.8438 16.1771C12.5174 16.5035 12.125 16.6667 11.6667 16.6667H1.66667V16.6667M7.5 5.83333V1.66667H1.66667V1.66667V1.66667V15V15V15H11.6667V15V15V5.83333H7.5V5.83333M1.66667 1.66667V1.66667V5.83333V5.83333V1.66667V5.83333V5.83333V15V15V15V15V15V15V1.66667V1.66667V1.66667V1.66667" fill="#70648C"/>
@@ -84,12 +89,12 @@
 
                     <div class="sidebar__submenu" aria-label="Submenu da Biblioteca">
                         <button type="button" class="sidebar__subitem" data-bib-view="relatorios">
-                            <i class="fa-regular fa-file-lines"></i>
+                            <i class="fa-solid fa-file-lines"></i>
                             <span>Relatórios</span>
                         </button>
                         <button type="button" class="sidebar__subitem" data-bib-view="timeline">
                             <i class="fa-solid fa-chart-line"></i>
-                            <span>Timeline</span>
+                            <span>Linha do tempo</span>
                         </button>
                         <button type="button" class="sidebar__subitem" data-bib-view="iocs">
                             <i class="fa-solid fa-fingerprint"></i>
@@ -98,9 +103,9 @@
                     </div>
                 </div>
 
-                <a href="#assistente" class="sidebar__item">
+                <a href="assistente.html" class="sidebar__item">
                     <span class="icon">
-                        <img src="assets/icones/icone_sona.svg" alt="Assistente Sona" width="19" height="19">
+                        <svg class="ti ti-sona" aria-hidden="true"><use href="#ti-sona"/></svg>
                     </span>
                     <span class="label">Assistente Sona</span>
                 </a>
@@ -116,14 +121,16 @@
                     <span class="label">Perfil</span>
                 </a>
                 <a href="configuracoes.html" class="sidebar__item">
-                    <span class="icon">⚙</span>
+                    <span class="icon">
+                          <img src="./assets/icones/Icon_config.svg" alt="Icone de configuracoes">
+                    </span>
                     <span class="label">Configurações</span>
                 </a>
             </div>
         </aside>
 
         <!-- CONTEÚDO PRINCIPAL -->
-        <main class="main-content" id="bibliotecaApp">
+        <main tabindex="-1" class="main-content" id="bibliotecaApp">
 
             <!-- =========================================================
                  VIEW 1: VISÃO GERAL DA BIBLIOTECA
@@ -134,7 +141,7 @@
                         <h1>Biblioteca Operacional</h1>
                         <p>
                             Acesse e gerencie o repositório de inteligência:
-                            relatórios de ameaças, timeline cronológica de
+                            relatórios de ameaças, linha do tempo cronológica de
                             incidentes e base ativa de indicadores de
                             comprometimento (IoCs).
                         </p>
@@ -152,20 +159,13 @@
                     <article class="biblioteca-card">
                         <div class="card-title">
                             <i class="fa-solid fa-chart-line"></i>
-                            <h2>Timeline de Incidentes</h2>
+                            <h2>Linha do tempo de incidentes</h2>
                         </div>
                         <p>
                             Visualização cronológica unificada de eventos
                             de segurança, correlação de logs e histórico
                             forense de ataques.
                         </p>
-                        <div class="card-info">
-                            <span>FEED TELEMETRICO</span>
-                            <strong>Sync contínua</strong>
-                        </div>
-                        <div class="card-footer">
-                            <span>3 incidentes em curso</span>
-                        </div>
                         <button type="button" class="card-action-btn" data-bib-view="timeline">
                             Abrir Linha do Tempo
                             <i class="fa-solid fa-arrow-right"></i>
@@ -182,13 +182,6 @@
                             Comprometimento: hashes maliciosos,
                             endereços IP suspeitos e domínios C2.
                         </p>
-                        <div class="card-info">
-                            <span>DISTRIBUIÇÃO DE RISCO</span>
-                            <strong>137 IoCs ativos</strong>
-                        </div>
-                        <div class="card-footer">
-                            <span>8 de risco crítico</span>
-                        </div>
                         <button type="button" class="card-action-btn" data-bib-view="iocs">
                             Consultar IoCs
                             <i class="fa-solid fa-arrow-right"></i>
@@ -197,21 +190,14 @@
 
                     <article class="biblioteca-card">
                         <div class="card-title">
-                            <i class="fa-regular fa-file-lines"></i>
+                            <i class="fa-solid fa-file-lines"></i>
                             <h2>Relatórios</h2>
                         </div>
                         <p>
-                            Dossiês técnicos, análises de campanhas de
-                            phishing, malware e relatórios executivos
-                            exportáveis em PDF/CSV.
+                            Dossiês técnicos e análises de campanhas de
+                            phishing e malware. Marque favoritos e reabra
+                            as investigações salvas na sandbox.
                         </p>
-                        <div class="card-info">
-                            <span>CADÊNCIA MENSAL</span>
-                            <strong>14 emitidos</strong>
-                        </div>
-                        <div class="card-footer">
-                            <span>2 pendentes de aprovação</span>
-                        </div>
                         <button type="button" class="card-action-btn" data-bib-view="relatorios">
                             Acessar Relatórios
                             <i class="fa-solid fa-arrow-right"></i>
@@ -223,14 +209,13 @@
                     <div class="atividades-header">
                         <div>
                             <h2>Atividades Recentes na Biblioteca</h2>
-                            <p>Trilha de auditoria e enriquecimento forense em tempo real</p>
-                        </div>
+                                                    </div>
 
                         <div class="atividades-tabs" role="tablist" aria-label="Filtrar atividades">
-                            <button type="button" class="tab active" data-bib-tab="todos">Todos (28)</button>
-                            <button type="button" class="tab" data-bib-tab="relatorios">Relatórios</button>
-                            <button type="button" class="tab" data-bib-tab="timeline">Timeline</button>
-                            <button type="button" class="tab" data-bib-tab="iocs">IoCs</button>
+                            <button type="button" role="tab" aria-selected="true" class="tab active" data-bib-tab="todos">Todos</button>
+                            <button type="button" role="tab" aria-selected="false" class="tab" data-bib-tab="relatorios">Relatórios</button>
+                            <button type="button" role="tab" aria-selected="false" class="tab" data-bib-tab="timeline">Timeline</button>
+                            <button type="button" role="tab" aria-selected="false" class="tab" data-bib-tab="iocs">IoCs</button>
                         </div>
                     </div>
 
@@ -240,9 +225,6 @@
                                 <tr>
                                     <th>Módulo / Vetor</th>
                                     <th>Artefato / Descrição</th>
-                                    <th>Gravidade / Status</th>
-                                    <th>Analista SOC</th>
-                                    <th>Carimbo (UTC)</th>
                                     <th>Ação rápida</th>
                                 </tr>
                             </thead>
@@ -251,17 +233,11 @@
                                 <tr data-categoria="iocs">
                                     <td>Base IoC</td>
                                     <td>194.38.29.142 [C2 Cobalt Strike]</td>
-                                    <td><span class="status critical">Crítico</span></td>
-                                    <td>J. Silva (L3)</td>
-                                    <td>10:42:18</td>
                                     <td><button type="button" class="btn-table">Investigar</button></td>
                                 </tr>
                                 <tr data-categoria="relatorios">
                                     <td>Relatórios</td>
                                     <td>REL-2024-089: Vetor Phishing QR-Code</td>
-                                    <td><span class="status approved">Aprovado</span></td>
-                                    <td>M. Castro (L2)</td>
-                                    <td>09:15:02</td>
                                     <td><button type="button" class="btn-table">Exportar PDF</button></td>
                                 </tr>
                             </tbody>
@@ -282,77 +258,74 @@
                  VIEW 2: TIMELINE DE ATIVIDADES
             ========================================================== -->
             <div id="view-timeline" class="bib-view" hidden>
+                <div id="fxApp">
                 <section class="biblioteca-header">
                     <div>
                         <button type="button" class="bib-back-link" data-bib-view="visao-geral">
                             <i class="fa-solid fa-arrow-left"></i> Voltar à Biblioteca
                         </button>
-                        <h1>Timeline de Atividades</h1>
-                        <p>Histórico de eventos, análises e alertas detectados no sistema.</p>
-                    </div>
-
-                    <div class="atividades-tabs" id="timelineFilters">
-                        <button type="button" class="tab active" data-tl-filter="todos">Todos</button>
-                        <button type="button" class="tab" data-tl-filter="alerta">Alertas</button>
-                        <button type="button" class="tab" data-tl-filter="analise">Análises</button>
-                        <button type="button" class="tab" data-tl-filter="erro">Erros</button>
+                        <h1>Linha do tempo do incidente</h1>
+                        <p id="fxTitulo">Reconstrução cronológica de um ataque a partir de logs.</p>
                     </div>
                 </section>
 
-                <section class="timeline-feed" id="timelineFeed">
-                    <article class="timeline-item" data-tl-type="alerta">
-                        <div class="tl-badge danger"><i class="fa-solid fa-triangle-exclamation"></i></div>
-                        <div class="tl-body">
-                            <div class="tl-meta">
-                                <span>14:32:05 · Hoje</span>
-                                <span class="status critical">Crítico</span>
-                            </div>
-                            <h3>Alerta de Malware Detectado</h3>
-                            <p>Arquivo <code>suspicious_activity.exe</code> foi detectado e bloqueado em quarentena pelo módulo Sona.</p>
-                            <div class="tl-tags">
-                                <span>Origem: IP 192.168.1.189</span>
-                                <span>Usuário: analista.soc</span>
-                            </div>
-                        </div>
-                    </article>
+                <div class="fx-bar">
+                    <label class="fx-field"><span>Incidente</span><select id="fxIncidente" class="bib-select"></select></label>
+                    <label class="fx-field"><span>Host</span><select id="fxHost" class="bib-select"><option value="todos">Todos os hosts</option></select></label>
+                    <span class="fx-edit" id="fxEditado" hidden>logs editados</span>
+                    <div class="fx-bar-r">
+                        <button type="button" class="btn-ghost btn-sm" id="fxBtnLogs" aria-expanded="false">Editar logs</button>
+                        <button type="button" class="btn-ghost btn-sm" id="fxExportar">Exportar JSON</button>
+                    </div>
+                </div>
 
-                    <article class="timeline-item" data-tl-type="analise">
-                        <div class="tl-badge info"><i class="fa-solid fa-file-shield"></i></div>
-                        <div class="tl-body">
-                            <div class="tl-meta">
-                                <span>11:18:20 · Hoje</span>
-                                <span class="status approved">Sucesso</span>
-                            </div>
-                            <h3>Análise de Arquivo Concluída</h3>
-                            <p>Relatório gerado para a URL desofuscada <code>hxxps://malicious-domain.com</code>. Nenhum gatilho severo encontrado.</p>
-                            <div class="tl-tags">
-                                <span>ID: #74827</span>
-                                <span>Por: Ana SOC L3</span>
-                            </div>
+                <section class="fx-logs" id="fxLogs" hidden>
+                    <div class="ide-bar">
+                        <div class="ide-group"><span class="ide-label">Logs brutos — aceita texto, chave=valor e JSON por linha</span></div>
+                        <div class="ide-group ide-actions">
+                            <button type="button" class="btn-ghost btn-sm" id="fxAbrirLog">Abrir arquivo</button>
+                            <button type="button" class="btn-ghost btn-sm" id="fxRestaurar">Restaurar original</button>
+                            <button type="button" class="btn-primary btn-sm" id="fxReconstruir">Reconstruir</button>
+                            <input type="file" id="fxArquivo" aria-label="Abrir arquivo de logs" accept=".log,.txt,.json,.jsonl,text/*" hidden>
                         </div>
-                    </article>
-
-                    <article class="timeline-item" data-tl-type="erro">
-                        <div class="tl-badge warning"><i class="fa-solid fa-shield-halved"></i></div>
-                        <div class="tl-body">
-                            <div class="tl-meta">
-                                <span>09:45:12 · Ontem</span>
-                                <span class="status warning">Médio</span>
-                            </div>
-                            <h3>Tentativa de Login Bloqueada</h3>
-                            <p>Múltiplas tentativas falhas de login registradas em um curto período para a conta <code>admin</code>.</p>
-                            <div class="tl-tags">
-                                <span>Localização: Desconhecida</span>
-                                <span>Bloqueio temporário ativo</span>
-                            </div>
-                        </div>
-                    </article>
+                    </div>
+                    <div class="ide-ed fx-ed" id="fxEd"></div>
+                    <div class="ide-status" id="fxStatusLogs" role="status"></div>
                 </section>
 
-                <div class="timeline-more-wrap">
-                    <button type="button" id="loadMoreTimeline" class="btn-secondary">
-                        <i class="fa-solid fa-chevron-down"></i> Carregar mais eventos
-                    </button>
+                <div class="fx-resumo-bar" id="fxResumo"></div>
+                <p class="fx-ign" id="fxIgn" hidden></p>
+
+                <section class="fx-card">
+                    <div class="fx-card-top">
+                        <h3 aria-level="2">Cadeia do ataque</h3>
+                        <div class="fx-tools">
+                            <button type="button" class="ide-link" id="fxTodasFechar">Recolher tudo</button>
+                            <span class="fx-sep"></span>
+                            <button type="button" class="ide-icon" id="fxZoomMenos" aria-label="Diminuir zoom" title="Diminuir zoom"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/></svg></button>
+                            <span class="fx-zoom" id="fxZoomInfo">100%</span>
+                            <button type="button" class="ide-icon" id="fxZoomMais" aria-label="Aumentar zoom" title="Aumentar zoom (Ctrl + rolagem)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                            <button type="button" class="ide-link" id="fxZoomAjustar">Ajustar</button>
+                        </div>
+                    </div>
+                    <div class="fx-legenda" role="group" aria-label="Legenda de severidade"><span><i style="background:var(--sev-crit,#e11d48)"></i>Crítico</span><span><i style="background:var(--sev-alto,#f97316)"></i>Alto</span><span><i style="background:var(--sev-med,#eab308)"></i>Médio</span><span><i style="background:var(--sev-ok,#10b981)"></i>Resposta</span><small>Clique nas etiquetas para recolher uma tática · ← → navegam entre os eventos</small></div>
+                    <div class="fx-gantt-wrap" id="fxGanttWrap">
+                        <div id="fxGantt"></div>
+                        <div class="fx-dica" id="fxDica" hidden></div>
+                    </div>
+
+                </section>
+
+                <div class="fx-grid">
+                    <section class="fx-card">
+                        <div class="fx-card-top"><h3 aria-level="2">Hierarquia</h3><small>host → tática → técnica → evento</small></div>
+                        <div class="fx-arvore" id="fxArvore"></div>
+                    </section>
+                    <section class="fx-card">
+                        <div class="fx-card-top"><h3 aria-level="2">Detalhe do evento</h3></div>
+                        <div id="fxDetalhe"></div>
+                    </section>
+                </div>
                 </div>
             </div>
 
@@ -360,151 +333,70 @@
                  VIEW 3: BASE DE IOCS
             ========================================================== -->
             <div id="view-iocs" class="bib-view" hidden>
+                <div id="iocApp">
                 <section class="biblioteca-header">
                     <div>
                         <button type="button" class="bib-back-link" data-bib-view="visao-geral">
                             <i class="fa-solid fa-arrow-left"></i> Voltar à Biblioteca
                         </button>
-                        <span class="bib-eyebrow">REPOSITÓRIO DE INTELIGÊNCIA</span>
                         <h1>Base de IoCs</h1>
-                        <p>Consulte e gerencie indicadores de comprometimento catalogados pela equipe SOC e feeds de telemetria ativa.</p>
+                        <p>Indicadores de comprometimento da equipe SOC, de feeds externos e extraídos na sandbox. Marque favoritos para acompanhar.</p>
                     </div>
+                    <button type="button" class="btn-ghost" id="iocExportar">Exportar CSV</button>
                 </section>
 
-                <section class="ioc-stats-grid" aria-label="Resumo da Base de IoCs">
-                    <article class="ioc-stat-card">
-                        <div class="ioc-stat-top">
-                            <span>IOCS MONITORADOS</span>
-                            <i class="fa-solid fa-fingerprint"></i>
-                        </div>
-                        <strong>4.289</strong>
-                        <small>+142 hoje</small>
-                    </article>
-
-                    <article class="ioc-stat-card">
-                        <div class="ioc-stat-top">
-                            <span>COM RISCO CRÍTICO</span>
-                            <i class="fa-solid fa-triangle-exclamation"></i>
-                        </div>
-                        <strong class="danger-num">612</strong>
-                        <small>15 ativos na rede</small>
-                    </article>
-
-                    <article class="ioc-stat-card">
-                        <div class="ioc-stat-top">
-                            <span>FEEDS CONECTADOS</span>
-                            <i class="fa-solid fa-tower-broadcast"></i>
-                        </div>
-                        <strong>19</strong>
-                        <small>Sincronização ativa</small>
-                    </article>
-
-                    <article class="ioc-stat-card">
-                        <div class="ioc-stat-top">
-                            <span>TAXA DE DETECÇÃO</span>
-                            <i class="fa-solid fa-shield-check"></i>
-                        </div>
-                        <strong>98.4%</strong>
-                        <small>Média de correlação</small>
-                    </article>
-                </section>
+                <section class="ioc-stats-grid" aria-label="Resumo da Base de IoCs" id="iocStats"></section>
 
                 <section class="atividades-container">
                     <div class="ioc-filters-bar">
-                        <input type="search" id="iocSearchInput" class="bib-input ioc-search-grow" placeholder="Buscar hash, IP, domínio ou ID...">
-
+                        <input type="search" id="iocSearchInput" class="bib-input ioc-search-grow" placeholder="Buscar valor ou família..." aria-label="Buscar indicador">
                         <select id="iocTypeFilter" class="bib-select" aria-label="Filtrar por tipo">
-                            <option value="todos">Tipo: Todos</option>
-                            <option value="Hash">Hash</option>
-                            <option value="IP">IP</option>
-                            <option value="Domínio">Domínio</option>
+                            <option value="todos">Tipo: todos</option>
+                            <option value="Hash">Hash</option><option value="IP">IP</option><option value="Domínio">Domínio</option><option value="URL">URL</option><option value="E-mail">E-mail</option>
                         </select>
-
-                        <select id="iocSeverityFilter" class="bib-select" aria-label="Filtrar por severidade">
-                            <option value="todos">Risco: Todos</option>
-                            <option value="Crítico">Crítico</option>
-                            <option value="Alto">Alto</option>
-                            <option value="Médio">Médio</option>
+                        <select id="iocSeverityFilter" class="bib-select" aria-label="Filtrar por risco">
+                            <option value="todos">Risco: todos</option>
+                            <option value="Crítico">Crítico</option><option value="Alto">Alto</option><option value="Médio">Médio</option><option value="Baixo">Baixo</option>
                         </select>
-
                         <select id="iocOriginFilter" class="bib-select" aria-label="Filtrar por origem">
-                            <option value="todos">Origem: Todas</option>
-                            <option value="Equipe SOC">Equipe SOC</option>
-                            <option value="Feed Externo">Feed Externo</option>
+                            <option value="todos">Origem: todas</option>
+                            <option value="Equipe SOC">Equipe SOC</option><option value="Feed Externo">Feed Externo</option><option value="Sandbox">Sandbox</option>
                         </select>
+                        <select id="iocPeriodFilter" class="bib-select" aria-label="Filtrar por período">
+                            <option value="todos">Período: todos</option>
+                            <option value="1">Últimas 24 h</option><option value="7">Últimos 7 dias</option><option value="30">Últimos 30 dias</option>
+                        </select>
+                        <button type="button" class="ioc-favtoggle" id="iocSoFav" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg>Só favoritos</button>
                     </div>
 
                     <div class="tabela-wrapper">
-                        <table class="atividades-table">
+                        <table class="atividades-table ioc-table">
                             <thead>
                                 <tr>
-                                    <th>IoC / Valor</th>
-                                    <th>Tipo</th>
-                                    <th>Risco / Severidade</th>
-                                    <th>Origem</th>
-                                    <th>Última ocorrência</th>
-                                    <th>Ação</th>
+                                    <th class="col-fav"><span class="sr-only">Favorito</span></th>
+                                    <th><button type="button" class="th-sort" data-sort="valor">IoC / valor</button></th>
+                                    <th><button type="button" class="th-sort" data-sort="tipo">Tipo</button></th>
+                                    <th><button type="button" class="th-sort" data-sort="risco">Risco</button></th>
+                                    <th><button type="button" class="th-sort" data-sort="origem">Origem</button></th>
+                                    <th><button type="button" class="th-sort" data-sort="ts">Última ocorrência</button></th>
+                                    <th><span class="sr-only">Ação</span></th>
                                 </tr>
                             </thead>
-                            <tbody id="iocsTbody">
-                                <tr data-ioc-type="Hash" data-ioc-sev="Crítico" data-ioc-origin="Equipe SOC">
-                                    <td class="mono-cell">8f14e45fceea167a5a36dedd4bea2543</td>
-                                    <td>Hash</td>
-                                    <td><span class="status critical">Crítico</span></td>
-                                    <td>Equipe SOC</td>
-                                    <td>Hoje, 10:42</td>
-                                    <td>
-                                        <button type="button" class="btn-table ioc-copy-btn" data-ioc-val="8f14e45fceea167a5a36dedd4bea2543" title="Copiar IoC">
-                                            <i class="fa-regular fa-copy"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr data-ioc-type="IP" data-ioc-sev="Alto" data-ioc-origin="Feed Externo">
-                                    <td class="mono-cell">185.220.101.42</td>
-                                    <td>IP</td>
-                                    <td><span class="status warning">Alto</span></td>
-                                    <td>Feed Externo</td>
-                                    <td>Hoje, 08:19</td>
-                                    <td>
-                                        <button type="button" class="btn-table ioc-copy-btn" data-ioc-val="185.220.101.42" title="Copiar IoC">
-                                            <i class="fa-regular fa-copy"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr data-ioc-type="Domínio" data-ioc-sev="Médio" data-ioc-origin="Equipe SOC">
-                                    <td class="mono-cell">cdn-update-servico.test</td>
-                                    <td>Domínio</td>
-                                    <td><span class="status approved">Médio</span></td>
-                                    <td>Equipe SOC</td>
-                                    <td>Ontem, 21:05</td>
-                                    <td>
-                                        <button type="button" class="btn-table ioc-copy-btn" data-ioc-val="cdn-update-servico.test" title="Copiar IoC">
-                                            <i class="fa-regular fa-copy"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr data-ioc-type="Hash" data-ioc-sev="Crítico" data-ioc-origin="Feed Externo">
-                                    <td class="mono-cell">44d88612fea8a8f36de82e1278abb02f</td>
-                                    <td>Hash</td>
-                                    <td><span class="status critical">Crítico</span></td>
-                                    <td>Feed Externo</td>
-                                    <td>20/11</td>
-                                    <td>
-                                        <button type="button" class="btn-table ioc-copy-btn" data-ioc-val="44d88612fea8a8f36de82e1278abb02f" title="Copiar IoC">
-                                            <i class="fa-regular fa-copy"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
+                            <tbody id="iocsTbody"></tbody>
                         </table>
                     </div>
 
                     <div class="ioc-pagination">
-                        <button type="button" id="iocPrevPage" class="btn-secondary">Anterior</button>
-                        <span id="iocPageInfo">Página 1 de 1</span>
-                        <button type="button" id="iocNextPage" class="btn-secondary">Próxima</button>
+                        <span class="ioc-count" id="iocCount"></span>
+                        <div class="ioc-pager">
+                            <select id="iocPageSize" class="bib-select" aria-label="Itens por página"><option value="10">10 por página</option><option value="25">25 por página</option><option value="50">50 por página</option></select>
+                            <button type="button" id="iocPrevPage" class="btn-secondary">Anterior</button>
+                            <span id="iocPageInfo">Página 1 de 1</span>
+                            <button type="button" id="iocNextPage" class="btn-secondary">Próxima</button>
+                        </div>
                     </div>
                 </section>
+                </div>
             </div>
 
             <!-- =========================================================
@@ -525,38 +417,20 @@
                     </button>
                 </section>
 
-                <section class="relatorios-grid" id="relatoriosGrid">
-                    <article class="biblioteca-card">
-                        <div class="card-title">
-                            <i class="fa-regular fa-file-lines"></i>
-                            <h2>REL-2026-089 · Phishing QR-Code</h2>
-                        </div>
-                        <p>Análise técnica de campanha de engenharia social direcionada ao setor financeiro utilizando redirecionamento dinâmico.</p>
-                        <div class="card-info">
-                            <span>SEVERIDADE: ALTA</span>
-                            <span class="status approved">Publicado</span>
-                        </div>
-                        <div class="card-footer">
-                            <span>Autor: M. Castro (L2) · 4 IoCs vinculados</span>
-                        </div>
-                    </article>
+                <div class="rel-bar">
+                    <div class="atividades-tabs" id="relFiltros">
+                        <button type="button" class="tab active" data-rel-filtro="todos">Todos</button>
+                        <button type="button" class="tab" data-rel-filtro="fav">Favoritos</button>
+                        <button type="button" class="tab" data-rel-filtro="sandbox">Da sandbox</button>
+                    </div>
+                    <input type="search" id="relBusca" class="bib-input" placeholder="Buscar relatório..." aria-label="Buscar relatório">
+                </div>
 
-                    <article class="biblioteca-card">
-                        <div class="card-title">
-                            <i class="fa-regular fa-file-lines"></i>
-                            <h2>REL-2026-090 · Infraestrutura C2</h2>
-                        </div>
-                        <p>Mapeamento de servidores de comando e controle associados a tráfego anômalo de saída na sub-rede corporativa.</p>
-                        <div class="card-info">
-                            <span>SEVERIDADE: CRÍTICA</span>
-                            <span class="status critical">Em Revisão</span>
-                        </div>
-                        <div class="card-footer">
-                            <span>Autor: J. Silva (L3) · 7 IoCs vinculados</span>
-                        </div>
-                    </article>
-                </section>
+                <section class="relatorios-grid" id="relatoriosGrid"></section>
+                <p class="vazio" id="relVazio" hidden>Nenhum relatório neste filtro.</p>
             </div>
+
+            <dialog class="dlg dlg-lg" id="dlgRel" aria-label="Detalhe do relatório"></dialog>
 
             <!-- =========================================================
                  VIEW 5: NOVO RELATÓRIO
@@ -627,13 +501,13 @@
                         <article class="nr-card">
                             <h2><i class="fa-solid fa-fingerprint"></i> Indicadores de comprometimento (IoCs)</h2>
                             <div class="nr-ioc-adder">
-                                <select id="nrIocTipo" class="bib-select">
+                                <select id="nrIocTipo" aria-label="Tipo do IoC" class="bib-select">
                                     <option value="IP">IP</option>
                                     <option value="SHA-256">SHA-256</option>
                                     <option value="Domínio">Domínio</option>
                                     <option value="URL">URL</option>
                                 </select>
-                                <input type="text" id="nrIocValor" class="bib-input" placeholder="Cole o IP, hash ou domínio...">
+                                <input type="text" id="nrIocValor" aria-label="Valor do IoC" class="bib-input" placeholder="Cole o IP, hash ou domínio...">
                                 <button type="button" id="nrAddIocBtn" class="btn-secondary">Adicionar</button>
                             </div>
                             <ul id="nrIocList" class="nr-ioc-list"></ul>
@@ -695,7 +569,13 @@
     </div>
 
     <!-- Script global -->
+    <script src="dados.js"></script>
+    <script src="store.js"></script>
+    <script src="editor.js"></script>
+    <script src="icons.js"></script>
     <script src="script.js"></script>
+    <script src="forense.js"></script>
+    <script src="iocs.js"></script>
 </body>
 
 </html>

@@ -6,21 +6,24 @@
     <link rel="stylesheet" href="style.css">
     <title>ThreatEye - Cyber Intel SOC</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <script src="theme.js"></script>
 </head>
 <body>
+    <a class="skip-link" href="#sandboxApp">Pular para o conteúdo</a>
 
     <!-- Barra Superior Fixa -->
     <header class="topbar">
         <div class="topbar__left">
-            <button id="toggleSidebar" class="hamburger-btn" aria-label="Alternar menu">
+            <button id="toggleSidebar" class="hamburger-btn" aria-label="Alternar menu" aria-controls="sidebar" aria-expanded="false">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
             <div class="brand">
-                <div class="brand__icon">◎</div>
+                <div class="brand__icon">
+                    <img src="./assets/icones/logo.svg" alt="Logo ThreatEye">
+                </div>
                 <div class="brand__text">
                     <strong>THREATEYE</strong>
                     <span>CYBER INTEL SOC</span>
@@ -36,7 +39,9 @@
                 <span class="badge"></span>
             </button>
             <a href="login.html" class="user-profile" style="text-decoration: none; color: inherit;">
-                <div class="user-avatar">👤</div>
+                <div class="user-avatar">
+                     <img src="./assets/icones/perfil.svg" alt="Icone de perfil">
+                </div>
                 <div class="user-info">
                     <strong>Analista SOC L3</strong>
                     <span>cyber.ops@threateye.io</span>
@@ -50,7 +55,7 @@
       
         <aside id="sidebar" class="sidebar">
             <nav class="sidebar__nav">
-                <a href="index.html" class="sidebar__item active">
+                <a href="index.html" class="sidebar__item active" aria-current="page">
                 <span class="icon">
                     <svg width="18" height="17" viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M17.6267 8.36353L9.95503 0.695931L9.4408 0.181714C9.32364 0.065323 9.16519 0 9.00004 0C8.83488 0 8.67644 0.065323 8.55927 0.181714L0.373343 8.36353C0.253286 8.48312 0.158403 8.62554 0.0942952 8.7824C0.0301869 8.93926 -0.0018477 9.10737 8.22954e-05 9.27681C0.00802401 9.97567 0.589755 10.5336 1.28863 10.5336H2.13243V17H15.8676V10.5336H16.7293C17.0688 10.5336 17.3885 10.4005 17.6287 10.1603C17.747 10.0424 17.8407 9.9022 17.9045 9.74782C17.9682 9.59344 18.0007 9.42795 18 9.26093C18 8.92341 17.867 8.60376 17.6267 8.36353ZM10.1119 15.5705H7.88819V11.5203H10.1119V15.5705ZM14.4381 9.10408V15.5705H11.3826V11.0438C11.3826 10.605 11.0272 10.2497 10.5884 10.2497H7.41169C6.97291 10.2497 6.61752 10.605 6.61752 11.0438V15.5705H3.56194V9.10408H1.65593L9.00202 1.76407L9.46066 2.2227L16.3461 9.10408H14.4381Z" fill="#A855F7"/>
@@ -77,14 +82,14 @@
                 </a>
                 <a href="assistente.html" class="sidebar__item">
                     <span class="icon">
-                        <img src="assets/icones/icone_sona.svg" alt="Assistente Sona" width="19" height="19">
+                        <svg class="ti ti-sona" aria-hidden="true"><use href="#ti-sona"/></svg>
                     </span>
                     <span class="label">Assistente Sona</span>
                 </a>
             </nav>
 
             <div class="sidebar__footer">
-                <a href="perfil.html" class="sidebar__item">
+                <a href="configuracoes.html#perfil" class="sidebar__item">
                     <span class="icon">
                         <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M6 6C5.175 6 4.46875 5.70625 3.88125 5.11875C3.29375 4.53125 3 3.825 3 3C3 2.175 3.29375 1.46875 3.88125 0.88125C4.46875 0.29375 5.175 0 6 0C6.825 0 7.53125 0.29375 8.11875 0.88125C8.70625 1.46875 9 2.175 9 3C9 3.825 8.70625 4.53125 8.11875 5.11875C7.53125 5.70625 6.825 6 6 6V6M0 12V9.9C0 9.475 0.109375 9.08437 0.328125 8.72812C0.546875 8.37187 0.8375 8.1 1.2 7.9125C1.975 7.525 2.7625 7.23438 3.5625 7.04063C4.3625 6.84688 5.175 6.75 6 6.75C6.825 6.75 7.6375 6.84688 8.4375 7.04063C9.2375 7.23438 10.025 7.525 10.8 7.9125C11.1625 8.1 11.4531 8.37187 11.6719 8.72812C11.8906 9.08437 12 9.475 12 9.9V12H0V12M1.5 10.5H10.5V9.9C10.5 9.7625 10.4656 9.6375 10.3969 9.525C10.3281 9.4125 10.2375 9.325 10.125 9.2625C9.45 8.925 8.76875 8.67188 8.08125 8.50313C7.39375 8.33438 6.7 8.25 6 8.25C5.3 8.25 4.60625 8.33438 3.91875 8.50313C3.23125 8.67188 2.55 8.925 1.875 9.2625C1.7625 9.325 1.67188 9.4125 1.60312 9.525C1.53437 9.6375 1.5 9.7625 1.5 9.9V10.5V10.5M6 4.5C6.4125 4.5 6.76562 4.35312 7.05937 4.05937C7.35312 3.76562 7.5 3.4125 7.5 3C7.5 2.5875 7.35312 2.23438 7.05937 1.94062C6.76562 1.64687 6.4125 1.5 6 1.5C5.5875 1.5 5.23438 1.64687 4.94063 1.94062C4.64688 2.23438 4.5 2.5875 4.5 3C4.5 3.4125 4.64688 3.76562 4.94063 4.05937C5.23438 4.35312 5.5875 4.5 6 4.5V4.5M6 3V3V3V3V3V3V3V3V3V3M6 10.5V10.5V10.5V10.5V10.5V10.5V10.5V10.5V10.5V10.5V10.5V10.5V10.5" fill="#2E1F44"/>
@@ -93,33 +98,115 @@
                     <span class="label">Perfil</span>
                 </a>
                 <a href="configuracoes.html" class="sidebar__item">
-                    <span class="icon">⚙</span>
+                    <span class="icon">
+                          <img src="./assets/icones/Icon_config.svg" alt="Icone de configuracoes">
+                    </span>
                     <span class="label">Configurações</span>
                 </a>
             </div>
         </aside>
 
-        <main class="main-content">
+        <main tabindex="-1" class="main-content" id="sandboxApp">
             <section class="hero-header">
                 <h1>Olá, Analista!</h1>
-                <p>Aqui você consegue enviar os arquivos para desofuscar</p>
+                <p>Cole ou arraste um JavaScript ofuscado. O código limpo aparece ao lado.</p>
             </section>
 
-            <div id="area_upload" class="upload-box">
-                <div class="upload-icon">⬆</div>
-                <h2>Arraste seu arquivo aqui</h2>
-                <p>ou clique para escolher do computador</p>
-                <button type="button" class="btn-primary"> Selecionar do Computador</button>
-                <input type="file" id="fileInput" hidden>
-            </div>
+            <form class="hash-bar" id="consultaForm" autocomplete="off">
+                <input type="text" id="consultaInput" placeholder="Consultar hash, IP, domínio, URL ou e-mail na base..." aria-label="Consultar indicador">
+                <button type="submit" class="btn-secondary">Consultar</button>
+            </form>
+            <div class="consulta-res" id="consultaRes" hidden></div>
 
-            <div class="hash-bar">
-                <input type="text" placeholder="URL, IP ou hash...">
-                <button type="button" class="btn-primary">Analisar</button>
-            </div>
+            <section class="ide" aria-label="Sandbox de desobfuscação">
+                <div class="ide-bar">
+                    <div class="ide-group">
+                        <span class="ide-label">Exemplos</span>
+                        <div class="ide-chips" id="exemplos"></div>
+                    </div>
+                    <div class="ide-group ide-actions">
+                        <button type="button" class="ide-icon" id="btnUndo" title="Desfazer" aria-label="Desfazer" disabled>
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg>
+                        </button>
+                        <button type="button" class="ide-icon" id="btnRedo" title="Refazer" aria-label="Refazer" disabled>
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 14 5-5-5-5"/><path d="M20 9H9.5a5.5 5.5 0 0 0 0 11H13"/></svg>
+                        </button>
+                        <button type="button" class="btn-ghost btn-sm" id="btnAbrir">Abrir arquivo</button>
+                        <button type="button" class="btn-ghost btn-sm" id="btnLimpar">Limpar</button>
+                        <button type="button" class="btn-primary btn-sm" id="btnRodar">Desobfuscar <kbd>Ctrl ↵</kbd></button>
+                        <input type="file" id="fileInput" aria-label="Abrir arquivo para análise" accept=".js,.txt,.html,.htm,.json,.log,text/*" hidden>
+                    </div>
+                </div>
+
+                <div class="ide-split">
+                    <div class="ide-pane" id="paneIn">
+                        <div class="ide-head"><span>Entrada</span><small id="infoIn">vazio</small></div>
+                        <div class="ide-ed" id="edIn"></div>
+                        <div class="ide-drop" id="drop" hidden>Solte o arquivo para analisar</div>
+                    </div>
+                    <div class="ide-pane">
+                        <div class="ide-head">
+                            <span>Código limpo</span>
+                            <div class="ide-head-r"><small id="infoOut"></small><button type="button" class="ide-link" id="btnCopiar" disabled>Copiar</button><button type="button" class="ide-link" id="btnBaixar" disabled>Baixar</button></div>
+                        </div>
+                        <div class="ide-ed" id="edOut"></div>
+                    </div>
+                </div>
+                <div class="ide-status" id="status" role="status">Pronto.</div>
+            </section>
+
+            <section class="res" id="res" hidden>
+                <div class="res-verdict" id="verdict"></div>
+                <div class="res-grid">
+                    <article class="res-card">
+                        <div class="res-title"><h3>Camadas de ofuscação</h3><small id="camInfo"></small></div>
+                        <div class="tree" id="tree"></div>
+                    </article>
+                    <div class="res-col">
+                        <article class="res-card">
+                            <div class="res-title"><h3>Indicadores extraídos</h3><button type="button" class="btn-ghost btn-sm" id="btnAddIocs">Adicionar à base</button></div>
+                            <div id="iocList"></div>
+                        </article>
+                        <article class="res-card">
+                            <div class="res-title"><h3>Comportamentos suspeitos</h3></div>
+                            <div id="behList"></div>
+                        </article>
+                    </div>
+                </div>
+            </section>
         </main>
+
+        <dialog class="dlg" id="dlgSalvar" aria-labelledby="dlgSalvarTitulo">
+            <form method="dialog" id="formSalvar">
+                <h3 id="dlgSalvarTitulo">Salvar investigação</h3>
+                <p class="dlg-sub">Fica guardada neste navegador, em Biblioteca → Relatórios, e pode ser reaberta na sandbox.</p>
+                <label for="svTitulo">Título</label>
+                <input id="svTitulo" type="text" required maxlength="90">
+                <div class="dlg-row">
+                    <div><label for="svSev">Severidade</label>
+                        <select id="svSev"><option>Crítica</option><option>Alta</option><option>Média</option><option>Baixa</option></select></div>
+                    <div><label for="svConf">Confiança</label>
+                        <select id="svConf"><option>Alta</option><option selected>Moderada</option><option>Baixa</option></select></div>
+                </div>
+                <label for="svResumo">Resumo</label>
+                <textarea id="svResumo" rows="3" maxlength="400"></textarea>
+                <label class="dlg-check"><input type="checkbox" id="svIocs" checked> Adicionar os indicadores extraídos à base de IoCs</label>
+                <label class="dlg-check"><input type="checkbox" id="svFav" checked> Marcar como favorito</label>
+                <div class="dlg-foot">
+                    <button type="button" class="btn-ghost" id="svCancelar">Cancelar</button>
+                    <button type="submit" class="btn-primary" id="svOk">Salvar</button>
+                </div>
+            </form>
+        </dialog>
     </div>
 
+    <script src="vendor/acorn.js"></script>
+    <script src="deobf.js"></script>
+    <script src="dados.js"></script>
+    <script src="store.js"></script>
+    <script src="editor.js"></script>
+    <script src="icons.js"></script>
     <script src="script.js"></script>
+    <script src="sandbox.js"></script>
 </body>
 </html>
