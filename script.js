@@ -962,3 +962,235 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+
+// ==========================================
+// 9. LÓGICA DA TELA DE PERFIL (perfil.html)
+// ==========================================
+document.addEventListener("DOMContentLoaded", () => {
+    const profileForm = document.getElementById("profileForm");
+    const passwordForm = document.getElementById("passwordForm");
+    const profileShell = document.querySelector(".profile-shell");
+    if (!profileForm && !passwordForm && !profileShell) return;
+
+    const $ = (id) => document.getElementById(id);
+    const get = (key, fallback) => getTE(key, fallback);
+    const set = (key, value) => {
+        setTE(key, value);
+        applyVisualPrefs();
+    };
+
+    const toast = document.querySelector(".toast") || (() => {
+        const el = document.createElement("div");
+        el.className = "toast";
+        document.body.appendChild(el);
+        return el;
+    })();
+
+    let toastTimer;
+    const notify = (message) => {
+        toast.textContent = message;
+        toast.classList.add("show");
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toast.classList.remove("show"), 2300);
+    };
+
+    const defaults = {
+        nome: "Analista ThreatEye",
+        email: "analista@threateye.sec",
+        cargo: "SOC Lead Tier 3"
+    };
+
+    const loadProfile = () => {
+        try {
+            const raw = get("te-profile", null);
+            const parsed = typeof raw === "string" ? JSON.parse(raw) : raw;
+            return parsed && typeof parsed === "object" ? { ...defaults, ...parsed } : { ...defaults };
+        } catch {
+            return { ...defaults };
+        }
+    };
+
+    let profile = loadProfile();
+
+    const initials = (name = "") =>
+        name
+            .trim()
+            .split(/\s+/)
+            .filter(Boolean)
+            .slice(0, 2)
+            .map((word) => word[0])
+            .join("")
+            .toUpperCase() || "AT";
+
+    const renderProfile = () => {
+        const avatar = initials(profile.nome);
+        if ($("nameInput")) $("nameInput").value = profile.nome;
+        if ($("emailInput")) $("emailInput").value = profile.email;
+        if ($("roleInput")) $("roleInput").value = profile.cargo;
+        if ($("profileAvatar")) $("profileAvatar").textContent = avatar;
+        if ($("profileHeading")) $("profileHeading").textContent = profile.nome;
+        if ($("profileRole")) $("profileRole").textContent = `${profile.cargo} · Squad Alpha`;
+        if ($("topAvatar")) $("topAvatar").textContent = avatar;
+        if ($("topName")) $("topName").textContent = profile.nome;
+        if ($("topEmail")) $("topEmail").textContent = profile.email;
+    };
+
+    renderProfile();
+
+    $("backBtn")?.addEventListener("click", () => notify("Você já está na área principal do perfil."));
+    $("topProfile")?.addEventListener("click", () => notify(`Perfil atual: ${profile.nome}`));
+    $("avatarBtn")?.addEventListener("click", () => notify("O avatar será conectado ao armazenamento da conta em breve."));
+
+    const tabs = profileShell ? profileShell.querySelectorAll(".tab") : document.querySelectorAll(".tab");
+    const panels = document.querySelectorAll(".tab-panel");
+
+    tabs.forEach((button) => {
+        button.addEventListener("click", () => {
+            const name = button.dataset.tab;
+            tabs.forEach((tab) => {
+                const selected = tab === button;
+                tab.classList.toggle("active", selected);
+                tab.setAttribute("aria-selected", String(selected));
+            });
+            panels.forEach((panel) => {
+                const active = panel.id === name;
+                panel.hidden = !active;
+                panel.classList.toggle("active", active);
+            });
+        });
+    });
+
+    profileForm?.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const nome = $("nameInput")?.value.trim() || "";
+        const email = ($("emailInput")?.value.trim() || "").toLowerCase();
+        const cargo = $("roleInput")?.value.trim() || defaults.cargo;
+
+        if (!nome || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            return notify("Informe um nome e e-mail válidos.");
+        }
+
+        profile = { nome, email, cargo };
+        set("te-profile", JSON.stringify(profile));
+        renderProfile();
+        notify("Alterações salvas com sucesso.");
+    });
+
+    passwordForm?.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const current = $("currentPassword")?.value || "";
+        const next = $("newPassword")?.value || "";
+        const confirm = $("confirmPassword")?.value || "";
+
+        if (!current || next.length < 8 || next !== confirm) {
+            return notify("Confira os campos da nova senha.");
+        }
+
+        set("te-password-updated", new Date().toISOString());
+        event.currentTarget.reset();
+        notify("Senha atualizada com segurança.");
+    });
+
+    const themeButtons = document.querySelectorAll("[data-theme-opt]");
+    const markTheme = () => {
+        const current = get("te-theme", "dark");
+        themeButtons.forEach((button) => {
+            const selected = button.dataset.themeOpt === current;
+            button.classList.toggle("selected", selected);
+            const check = button.querySelector(".option-check");
+            if (check) check.textContent = selected ? "✓" : "";
+        });
+    };
+    themeButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+            set("te-theme", button.dataset.themeOpt);
+            markTheme();
+            notify("Tema atualizado.");
+        });
+    });
+    markTheme();
+
+    const accentButtons = document.querySelectorAll("[data-accent]");
+    const markAccent = () => {
+        const current = String(get("te-accent", "#7e22ce")).toLowerCase();
+        accentButtons.forEach((button) => {
+            button.classList.toggle("selected", button.dataset.accent?.toLowerCase() === current);
+        });
+        if ($("accentPicker")) $("accentPicker").value = current;
+    };
+    accentButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+            set("te-accent", button.dataset.accent);
+            markAccent();
+            notify("Cor de destaque atualizada.");
+        });
+    });
+    $("accentPicker")?.addEventListener("input", (event) => {
+        set("te-accent", event.target.value);
+        markAccent();
+    });
+    markAccent();
+
+    const softToggle = $("softToggle");
+    if (softToggle) {
+        softToggle.checked = get("te-soft", "0") === "1";
+        softToggle.addEventListener("change", (event) => {
+            set("te-soft", event.target.checked ? "1" : "0");
+            notify("Conforto visual atualizado.");
+        });
+    }
+
+    const densityButtons = document.querySelectorAll("[data-density-opt]");
+    const markDensity = () => {
+        const current = get("te-density", "confortavel");
+        densityButtons.forEach((button) => {
+            button.classList.toggle("selected", button.dataset.densityOpt === current);
+        });
+        if ($("densityLabel")) {
+            $("densityLabel").textContent = current === "compacto" ? "COMPACTO" : "CONFORTÁVEL";
+        }
+    };
+    densityButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+            set("te-density", button.dataset.densityOpt);
+            markDensity();
+            notify("Densidade atualizada.");
+        });
+    });
+    markDensity();
+
+    const languageSelect = $("languageSelect");
+    if (languageSelect) {
+        languageSelect.value = get("te-language", "Português (Brasil)");
+        languageSelect.addEventListener("change", (event) => {
+            set("te-language", event.target.value);
+            notify("Idioma salvo neste navegador.");
+        });
+    }
+
+    $("logoutAll")?.addEventListener("click", () => {
+        set("te-sessions-ended", new Date().toISOString());
+        notify("As demais sessões foram desconectadas.");
+    });
+
+    $("exportBtn")?.addEventListener("click", () => {
+        const data = {
+            exportadoEm: new Date().toISOString(),
+            perfil: profile,
+            preferencias: {
+                tema: get("te-theme", "dark"),
+                cor: get("te-accent", "#7e22ce"),
+                fadiga: get("te-soft", "0"),
+                densidade: get("te-density", "confortavel"),
+                idioma: get("te-language", "Português (Brasil)")
+            }
+        };
+        const url = URL.createObjectURL(new Blob([JSON.stringify(data, null, 2)], { type: "application/json" }));
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "auditoria-threateye.json";
+        link.click();
+        setTimeout(() => URL.revokeObjectURL(url), 0);
+        notify("Dados de auditoria exportados.");
+    });
+});
