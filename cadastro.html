@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <script src="theme.js"></script>
 </head>
 
@@ -32,16 +32,18 @@
                     <label for="nome">Nome</label>
 
                     <div class="input-wrapper">
-                        <i class="fa-regular fa-user"></i>
+                        <i class="fa-solid fa-user"></i>
                         <input
                             type="text"
                             id="nome"
                             placeholder="Seu nome"
+                            autocomplete="name"
+                            aria-describedby="nomeError"
                             required
                         >
                     </div>
 
-                    <span class="error-message" id="nomeError"></span>
+                    <span class="error-message" id="nomeError" role="alert"></span>
                 </div>
 
                 <!-- E-mail -->
@@ -49,16 +51,21 @@
                     <label for="email">E-mail</label>
 
                     <div class="input-wrapper">
-                        <i class="fa-regular fa-envelope"></i>
+                        <i class="fa-solid fa-envelope"></i>
                         <input
                             type="email"
                             id="email"
                             placeholder="seu@email.com"
+                            autocomplete="email"
+                            inputmode="email"
+                            autocapitalize="off"
+                            spellcheck="false"
+                            aria-describedby="emailError"
                             required
                         >
                     </div>
 
-                    <span class="error-message" id="emailError"></span>
+                    <span class="error-message" id="emailError" role="alert"></span>
                 </div>
 
                 <!-- Senha -->
@@ -71,11 +78,15 @@
                             type="password"
                             id="password"
                             placeholder="Crie uma senha"
+                            autocomplete="new-password"
+                            minlength="8"
+                            aria-describedby="passwordHint passwordError"
                             required
                         >
                     </div>
 
-                    <span class="error-message" id="passwordError"></span>
+                    <span class="form-hint" id="passwordHint">Use pelo menos 8 caracteres.</span>
+                    <span class="error-message" id="passwordError" role="alert"></span>
                 </div>
 
                 <!-- Confirmar senha -->
@@ -88,12 +99,16 @@
                             type="password"
                             id="confirmPassword"
                             placeholder="Digite sua senha novamente"
+                            autocomplete="new-password"
+                            aria-describedby="confirmPasswordError"
                             required
                         >
                     </div>
 
-                    <span class="error-message" id="confirmPasswordError"></span>
+                    <span class="error-message" id="confirmPasswordError" role="alert"></span>
                 </div>
+
+                <p class="form-ok" id="cadastroOk" role="status" hidden><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Conta criada! Redirecionando para o login…</p>
 
                 <button type="submit" class="btn-submit">
                     <span class="btn-text">Criar conta</span>

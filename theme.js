@@ -15,6 +15,7 @@
         r.dataset.theme = theme;
         r.dataset.soft = get("te-soft", "0");
         r.dataset.density = get("te-density", "confortavel");
+        r.dataset.glass = get("te-glass", "1");
         r.style.setProperty("--accent-purple", accent);
         r.style.setProperty("--accent-rgb", rgb.join(","));
         r.style.setProperty("--accent-hover", hex(mix(rgb, [0, 0, 0], 0.2)));

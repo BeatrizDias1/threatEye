@@ -1,239 +1,239 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+    <!DOCTYPE html>
+    <html lang="pt-br">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ThreatEye - Assistente Sona</title>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ThreatEye - Assistente Sona</title>
 
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <script src="theme.js"></script>
-</head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+        <script src="theme.js"></script>
+    </head>
 
-<body>
+    <body>
+    <a class="skip-link" href="#sonaApp">Pular para o conteúdo</a>
 
-    <header class="topbar">
-        <div class="topbar__left">
-            <button id="toggleSidebar" class="hamburger-btn" aria-label="Alternar menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            <div class="brand">
-                <div class="brand__icon">◎</div>
-                <div class="brand__text">
-                    <strong>THREATEYE</strong>
-                    <span>CYBER INTEL SOC</span>
+        <header class="topbar">
+            <div class="topbar__left">
+                <button id="toggleSidebar" class="hamburger-btn" aria-label="Alternar menu" aria-controls="sidebar" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <div class="brand">
+                    <div class="brand__icon">
+                        <img src="./assets/icones/logo.svg" alt="Logo ThreatEye">
+                    </div>
+                    <div class="brand__text">
+                        <strong>THREATEYE</strong>
+                        <span>CYBER INTEL SOC</span>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="topbar__right">
-            <button type="button" class="notif-btn" aria-label="Notificações">
-                <svg width="12" height="15" viewBox="0 0 12 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0 12.75V11.25H1.5V6C1.5 4.9625 1.8125 4.04063 2.4375 3.23438C3.0625 2.42812 3.875 1.9 4.875 1.65V1.125C4.875 0.8125 4.98438 0.546875 5.20312 0.328125C5.42188 0.109375 5.6875 0 6 0C6.3125 0 6.57812 0.109375 6.79688 0.328125C7.01562 0.546875 7.125 0.8125 7.125 1.125V1.65C8.125 1.9 8.9375 2.42812 9.5625 3.23438C10.1875 4.04063 10.5 4.9625 10.5 6V11.25H12V12.75H0V12.75M6 7.125V7.125V7.125V7.125V7.125V7.125V7.125V7.125V7.125M6 15C5.5875 15 5.23438 14.8531 4.94063 14.5594C4.64688 14.2656 4.5 13.9125 4.5 13.5H7.5C7.5 13.9125 7.35312 14.2656 7.05937 14.5594C6.76562 14.8531 6.4125 15 6 15V15M3 11.25H9V6C9 5.175 8.70625 4.46875 8.11875 3.88125C7.53125 3.29375 6.825 3 6 3C5.175 3 4.46875 3.29375 3.88125 3.88125C3.29375 4.46875 3 5.175 3 6V11.25V11.25" fill="#B8A8D0"/>
-                </svg>
-                <span class="badge"></span>
-            </button>
-            <a href="login.html" class="user-profile" style="text-decoration: none; color: inherit;">
-                <div class="user-avatar">👤</div>
-                <div class="user-info">
-                    <strong>Analista SOC L3</strong>
-                    <span>cyber.ops@threateye.io</span>
-                </div>
-            </a>
-        </div>
-    </header>
-
-    <div class="layout">
-
-        <aside id="sidebar" class="sidebar">
-            <nav class="sidebar__nav">
-                <a href="index.html" class="sidebar__item">
-                    <span class="icon">
-                        <svg width="18" height="17" viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M17.6267 8.36353L9.95503 0.695931L9.4408 0.181714C9.32364 0.065323 9.16519 0 9.00004 0C8.83488 0 8.67644 0.065323 8.55927 0.181714L0.373343 8.36353C0.253286 8.48312 0.158403 8.62554 0.0942952 8.7824C0.0301869 8.93926 -0.0018477 9.10737 8.22954e-05 9.27681C0.00802401 9.97567 0.589755 10.5336 1.28863 10.5336H2.13243V17H15.8676V10.5336H16.7293C17.0688 10.5336 17.3885 10.4005 17.6287 10.1603C17.747 10.0424 17.8407 9.9022 17.9045 9.74782C17.9682 9.59344 18.0007 9.42795 18 9.26093C18 8.92341 17.867 8.60376 17.6267 8.36353ZM10.1119 15.5705H7.88819V11.5203H10.1119V15.5705ZM14.4381 9.10408V15.5705H11.3826V11.0438C11.3826 10.605 11.0272 10.2497 10.5884 10.2497H7.41169C6.97291 10.2497 6.61752 10.605 6.61752 11.0438V15.5705H3.56194V9.10408H1.65593L9.00202 1.76407L9.46066 2.2227L16.3461 9.10408H14.4381Z" fill="#A855F7"/>
-                        </svg>
-                    </span>
-                    <span class="label">Início</span>
-                </a>
-
-                <a href="dashboard.html" class="sidebar__item">
-                    <span class="icon">
-                        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M8.33333 5V0H15V5H8.33333V5M0 8.33333V0H6.66667V8.33333H0V8.33333M8.33333 15V6.66667H15V15H8.33333V15M0 15V10H6.66667V15H0V15M1.66667 6.66667H5V1.66667H1.66667V6.66667V6.66667M10 13.3333H13.3333V8.33333H10V13.3333V13.3333M10 3.33333H13.3333V1.66667H10V3.33333V3.33333M1.66667 13.3333H5V11.6667H1.66667V13.3333V13.3333M5 6.66667V6.66667V6.66667V6.66667V6.66667V6.66667M10 3.33333V3.33333V3.33333V3.33333V3.33333V3.33333M10 8.33333V8.33333V8.33333V8.33333V8.33333V8.33333M5 11.6667V11.6667V11.6667V11.6667V11.6667V11.6667" fill="#70648C"/>
-                        </svg>
-                    </span>
-                    <span class="label">Dashboard</span>
-                </a>
-
-                <a href="biblioteca.html" class="sidebar__item">
-                    <span class="icon">
-                        <svg width="14" height="17" viewBox="0 0 14 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M3.33333 13.3333H10V11.6667H3.33333V13.3333V13.3333M3.33333 10H10V8.33333H3.33333V10V10M1.66667 16.6667C1.20833 16.6667 0.815972 16.5035 0.489583 16.1771C0.163194 15.8507 0 15.4583 0 15V1.66667C0 1.20833 0.163194 0.815972 0.489583 0.489583C0.815972 0.163194 1.20833 0 1.66667 0H8.33333L13.3333 5V15C13.3333 15.4583 13.1701 15.8507 12.8438 16.1771C12.5174 16.5035 12.125 16.6667 11.6667 16.6667H1.66667V16.6667M7.5 5.83333V1.66667H1.66667V1.66667V1.66667V15V15V15H11.6667V15V15V5.83333H7.5V5.83333M1.66667 1.66667V1.66667V5.83333V5.83333V1.66667V5.83333V5.83333V15V15V15V15V15V15V1.66667V1.66667V1.66667V1.66667" fill="#70648C"/>
-                        </svg>
-                    </span>
-                    <span class="label">Biblioteca</span>
-                </a>
-
-                <a href="assistente.html" class="sidebar__item active">
-                    <span class="icon">
-                        <img src="assets/icones/icone_sona.svg" alt="Assistente Sona" width="19" height="19">
-                    </span>
-                    <span class="label">Assistente Sona</span>
-                </a>
-            </nav>
-
-            <div class="sidebar__footer">
-                <a href="perfil.html" class="sidebar__item">
-                    <span class="icon">
-                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M6 6C5.175 6 4.46875 5.70625 3.88125 5.11875C3.29375 4.53125 3 3.825 3 3C3 2.175 3.29375 1.46875 3.88125 0.88125C4.46875 0.29375 5.175 0 6 0C6.825 0 7.53125 0.29375 8.11875 0.88125C8.70625 1.46875 9 2.175 9 3C9 3.825 8.70625 4.53125 8.11875 5.11875C7.53125 5.70625 6.825 6 6 6V6M0 12V9.9C0 9.475 0.109375 9.08437 0.328125 8.72812C0.546875 8.37187 0.8375 8.1 1.2 7.9125C1.975 7.525 2.7625 7.23438 3.5625 7.04063C4.3625 6.84688 5.175 6.75 6 6.75C6.825 6.75 7.6375 6.84688 8.4375 7.04063C9.2375 7.23438 10.025 7.525 10.8 7.9125C11.1625 8.1 11.4531 8.37187 11.6719 8.72812C11.8906 9.08437 12 9.475 12 9.9V12H0V12M1.5 10.5H10.5V9.9C10.5 9.7625 10.4656 9.6375 10.3969 9.525C10.3281 9.4125 10.2375 9.325 10.125 9.2625C9.45 8.925 8.76875 8.67188 8.08125 8.50313C7.39375 8.33438 6.7 8.25 6 8.25C5.3 8.25 4.60625 8.33438 3.91875 8.50313C3.23125 8.67188 2.55 8.925 1.875 9.2625C1.7625 9.325 1.67188 9.4125 1.60312 9.525C1.53437 9.6375 1.5 9.7625 1.5 9.9V10.5V10.5M6 4.5C6.4125 4.5 6.76562 4.35312 7.05937 4.05937C7.35312 3.76562 7.5 3.4125 7.5 3C7.5 2.5875 7.35312 2.23438 7.05937 1.94062C6.76562 1.64687 6.4125 1.5 6 1.5C5.5875 1.5 5.23438 1.64687 4.94063 1.94062C4.64688 2.23438 4.5 2.5875 4.5 3C4.5 3.4125 4.64688 3.76562 4.94063 4.05937C5.23438 4.35312 5.5875 4.5 6 4.5V4.5M6 3V3V3V3V3V3V3V3V3V3M6 10.5V10.5V10.5V10.5V10.5V10.5V10.5V10.5V10.5V10.5V10.5V10.5V10.5" fill="#2E1F44"/>
-                        </svg>
-                    </span>
-                    <span class="label">Perfil</span>
-                </a>
-                <a href="configuracoes.html" class="sidebar__item">
-                    <span class="icon">⚙</span>
-                    <span class="label">Configurações</span>
+            <div class="topbar__right">
+                <button type="button" class="notif-btn" aria-label="Notificações">
+                    <svg width="12" height="15" viewBox="0 0 12 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 12.75V11.25H1.5V6C1.5 4.9625 1.8125 4.04063 2.4375 3.23438C3.0625 2.42812 3.875 1.9 4.875 1.65V1.125C4.875 0.8125 4.98438 0.546875 5.20312 0.328125C5.42188 0.109375 5.6875 0 6 0C6.3125 0 6.57812 0.109375 6.79688 0.328125C7.01562 0.546875 7.125 0.8125 7.125 1.125V1.65C8.125 1.9 8.9375 2.42812 9.5625 3.23438C10.1875 4.04063 10.5 4.9625 10.5 6V11.25H12V12.75H0V12.75M6 7.125V7.125V7.125V7.125V7.125V7.125V7.125V7.125V7.125M6 15C5.5875 15 5.23438 14.8531 4.94063 14.5594C4.64688 14.2656 4.5 13.9125 4.5 13.5H7.5C7.5 13.9125 7.35312 14.2656 7.05937 14.5594C6.76562 14.8531 6.4125 15 6 15V15M3 11.25H9V6C9 5.175 8.70625 4.46875 8.11875 3.88125C7.53125 3.29375 6.825 3 6 3C5.175 3 4.46875 3.29375 3.88125 3.88125C3.29375 4.46875 3 5.175 3 6V11.25V11.25" fill="#B8A8D0"/>
+                    </svg>
+                    <span class="badge"></span>
+                </button>
+                <a href="login.html" class="user-profile" style="text-decoration: none; color: inherit;">
+                <div class="user-avatar">
+                        <img src="./assets/icones/perfil.svg" alt="Icone de perfil">
+                    </div>
+                    <div class="user-info">
+                        <strong>Analista SOC L3</strong>
+                        <span>cyber.ops@threateye.io</span>
+                    </div>
                 </a>
             </div>
-        </aside>
+        </header>
 
-        <main class="main-content" id="sonaApp">
-            <section class="sona-shell">
-                <header class="sona-topbar">
-                    <div class="sona-identity">
-                        <div class="sona-avatar-mini">
-                            <img src="assets/icones/icone_sona.svg" alt="Sona" width="22" height="22" onerror="this.style.display='none'; this.parentElement.textContent='✦';">
-                        </div>
-                        <div>
-                            <strong>Sona</strong>
-                            <span><i class="sona-dot"></i> Online</span>
-                        </div>
-                    </div>
+        <div class="layout">
 
-                    <div class="sona-status-pill">
-                        <i class="fa-regular fa-circle-check"></i>
-                        <span>A sua segurança, a nossa prioridade</span>
-                        <button type="button" id="sonaResetBtn" class="sona-icon-action" title="Nova conversa" aria-label="Nova conversa">
-                            <i class="fa-solid fa-rotate-left"></i>
-                        </button>
-                    </div>
-                </header>
+            <aside id="sidebar" class="sidebar">
+                <nav class="sidebar__nav">
+                    <a href="index.html" class="sidebar__item">
+                        <span class="icon">
+                            <svg width="18" height="17" viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M17.6267 8.36353L9.95503 0.695931L9.4408 0.181714C9.32364 0.065323 9.16519 0 9.00004 0C8.83488 0 8.67644 0.065323 8.55927 0.181714L0.373343 8.36353C0.253286 8.48312 0.158403 8.62554 0.0942952 8.7824C0.0301869 8.93926 -0.0018477 9.10737 8.22954e-05 9.27681C0.00802401 9.97567 0.589755 10.5336 1.28863 10.5336H2.13243V17H15.8676V10.5336H16.7293C17.0688 10.5336 17.3885 10.4005 17.6287 10.1603C17.747 10.0424 17.8407 9.9022 17.9045 9.74782C17.9682 9.59344 18.0007 9.42795 18 9.26093C18 8.92341 17.867 8.60376 17.6267 8.36353ZM10.1119 15.5705H7.88819V11.5203H10.1119V15.5705ZM14.4381 9.10408V15.5705H11.3826V11.0438C11.3826 10.605 11.0272 10.2497 10.5884 10.2497H7.41169C6.97291 10.2497 6.61752 10.605 6.61752 11.0438V15.5705H3.56194V9.10408H1.65593L9.00202 1.76407L9.46066 2.2227L16.3461 9.10408H14.4381Z" fill="#A855F7"/>
+                            </svg>
+                        </span>
+                        <span class="label">Início</span>
+                    </a>
 
-                <div class="sona-body" id="sonaBody">
-                    <div class="sona-hero" id="sonaHero">
-                        <div class="sona-mascot">
-                            <img src="assets/icones/sona.png" alt="Sona" width="114" height="118" onerror="this.style.display='none'; this.parentElement.innerHTML='<span>✦</span>';">
-                        </div>
+                    <a href="dashboard.html" class="sidebar__item">
+                        <span class="icon">
+                            <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M8.33333 5V0H15V5H8.33333V5M0 8.33333V0H6.66667V8.33333H0V8.33333M8.33333 15V6.66667H15V15H8.33333V15M0 15V10H6.66667V15H0V15M1.66667 6.66667H5V1.66667H1.66667V6.66667V6.66667M10 13.3333H13.3333V8.33333H10V13.3333V13.3333M10 3.33333H13.3333V1.66667H10V3.33333V3.33333M1.66667 13.3333H5V11.6667H1.66667V13.3333V13.3333M5 6.66667V6.66667V6.66667V6.66667V6.66667V6.66667M10 3.33333V3.33333V3.33333V3.33333V3.33333V3.33333M10 8.33333V8.33333V8.33333V8.33333V8.33333V8.33333M5 11.6667V11.6667V11.6667V11.6667V11.6667V11.6667" fill="#70648C"/>
+                            </svg>
+                        </span>
+                        <span class="label">Dashboard</span>
+                    </a>
 
-                        <h1>Olá! Eu sou a Sona.</h1>
-                        <p>
-                            Ajudo a rastrear e analisar erros em sites, identificando
-                            vulnerabilidades e possíveis problemas de segurança.
-                        </p>
+                    <a href="biblioteca.html" class="sidebar__item">
+                        <span class="icon">
+                            <svg width="14" height="17" viewBox="0 0 14 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3.33333 13.3333H10V11.6667H3.33333V13.3333V13.3333M3.33333 10H10V8.33333H3.33333V10V10M1.66667 16.6667C1.20833 16.6667 0.815972 16.5035 0.489583 16.1771C0.163194 15.8507 0 15.4583 0 15V1.66667C0 1.20833 0.163194 0.815972 0.489583 0.489583C0.815972 0.163194 1.20833 0 1.66667 0H8.33333L13.3333 5V15C13.3333 15.4583 13.1701 15.8507 12.8438 16.1771C12.5174 16.5035 12.125 16.6667 11.6667 16.6667H1.66667V16.6667M7.5 5.83333V1.66667H1.66667V1.66667V1.66667V15V15V15H11.6667V15V15V5.83333H7.5V5.83333M1.66667 1.66667V1.66667V5.83333V5.83333V1.66667V5.83333V5.83333V15V15V15V15V15V15V1.66667V1.66667V1.66667V1.66667" fill="#70648C"/>
+                            </svg>
+                        </span>
+                        <span class="label">Biblioteca</span>
+                    </a>
 
-                        <div class="sona-cards">
-                            <button type="button" class="sona-card" data-sona-prompt="Analise o site https://exemplo.com quanto a cabeçalhos de segurança e vulnerabilidades expostas.">
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                                <span class="sona-card__text">
-                                    <strong>Análise de sites</strong>
-                                    <small>e vulnerabilidades</small>
-                                </span>
-                            </button>
+                    <a href="assistente.html" class="sidebar__item active" aria-current="page">
+                        <span class="icon">
+                            <svg class="ti ti-sona" aria-hidden="true"><use href="#ti-sona"/></svg>
+                        </span>
+                        <span class="label">Assistente Sona</span>
+                    </a>
+                </nav>
 
-                            <button type="button" class="sona-card" data-sona-prompt="Verifique falhas de segurança e erros de configuração no fluxo de autenticação.">
-                                <i class="fa-solid fa-shield-halved"></i>
-                                <span class="sona-card__text">
-                                    <strong>Detecção de erros</strong>
-                                    <small>e falhas de segurança</small>
-                                </span>
-                            </button>
-
-                            <button type="button" class="sona-card" data-sona-prompt="Gere um relatório claro e objetivo com os principais riscos encontrados.">
-                                <i class="fa-solid fa-bolt"></i>
-                                <span class="sona-card__text">
-                                    <strong>Relatórios claros</strong>
-                                    <small>e objetivos</small>
-                                </span>
-                            </button>
-                        </div>
-
-                        <div class="sona-prompt-lead">
-                            <i class="fa-solid fa-sparkles"></i>
-                            <span>Como posso ajudar hoje?</span>
-                        </div>
-                    </div>
-
-                    <div class="sona-messages" id="sonaMessages" aria-live="polite"></div>
+                <div class="sidebar__footer">
+                    <a href="configuracoes.html#perfil" class="sidebar__item">
+                        <span class="icon">
+                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6 6C5.175 6 4.46875 5.70625 3.88125 5.11875C3.29375 4.53125 3 3.825 3 3C3 2.175 3.29375 1.46875 3.88125 0.88125C4.46875 0.29375 5.175 0 6 0C6.825 0 7.53125 0.29375 8.11875 0.88125C8.70625 1.46875 9 2.175 9 3C9 3.825 8.70625 4.53125 8.11875 5.11875C7.53125 5.70625 6.825 6 6 6V6M0 12V9.9C0 9.475 0.109375 9.08437 0.328125 8.72812C0.546875 8.37187 0.8375 8.1 1.2 7.9125C1.975 7.525 2.7625 7.23438 3.5625 7.04063C4.3625 6.84688 5.175 6.75 6 6.75C6.825 6.75 7.6375 6.84688 8.4375 7.04063C9.2375 7.23438 10.025 7.525 10.8 7.9125C11.1625 8.1 11.4531 8.37187 11.6719 8.72812C11.8906 9.08437 12 9.475 12 9.9V12H0V12M1.5 10.5H10.5V9.9C10.5 9.7625 10.4656 9.6375 10.3969 9.525C10.3281 9.4125 10.2375 9.325 10.125 9.2625C9.45 8.925 8.76875 8.67188 8.08125 8.50313C7.39375 8.33438 6.7 8.25 6 8.25C5.3 8.25 4.60625 8.33438 3.91875 8.50313C3.23125 8.67188 2.55 8.925 1.875 9.2625C1.7625 9.325 1.67188 9.4125 1.60312 9.525C1.53437 9.6375 1.5 9.7625 1.5 9.9V10.5V10.5M6 4.5C6.4125 4.5 6.76562 4.35312 7.05937 4.05937C7.35312 3.76562 7.5 3.4125 7.5 3C7.5 2.5875 7.35312 2.23438 7.05937 1.94062C6.76562 1.64687 6.4125 1.5 6 1.5C5.5875 1.5 5.23438 1.64687 4.94063 1.94062C4.64688 2.23438 4.5 2.5875 4.5 3C4.5 3.4125 4.64688 3.76562 4.94063 4.05937C5.23438 4.35312 5.5875 4.5 6 4.5V4.5M6 3V3V3V3V3V3V3V3V3V3M6 10.5V10.5V10.5V10.5V10.5V10.5V10.5V10.5V10.5V10.5V10.5V10.5V10.5" fill="#2E1F44"/>
+                            </svg>
+                        </span>
+                        <span class="label">Perfil</span>
+                    </a>
+                    <a href="configuracoes.html" class="sidebar__item">
+                    <span class="icon">
+                            <img src="./assets/icones/Icon_config.svg" alt="Icone de configuracoes">
+                        </span>
+                        <span class="label">Configurações</span>
+                    </a>
                 </div>
+            </aside>
 
-                <!-- BANNER DE ERRO (FORMATO DE URL INVÁLIDO) -->
-                <div class="sona-error-banner" id="sonaErrorBanner" hidden role="alert">
-                    <div class="sona-error-icon">
-                        <i class="fa-solid fa-circle-exclamation"></i>
-                    </div>
-                    <div class="sona-error-content">
-                        <strong>Formato de URL inválido.</strong>
-                        <p id="sonaErrorText">
-                            Não foi possível iniciar a análise. Certifique-se de que o link contém uma estrutura completa (ex.: <code>https://exemplo.com</code>).
-                        </p>
-                        <div class="sona-error-actions">
-                            <button type="button" id="sonaEditLinkBtn" class="sona-err-btn primary">
-                                <i class="fa-solid fa-pen"></i> Editar link
-                            </button>
-                            <button type="button" id="sonaUndoBtn" class="sona-err-btn">
-                                <i class="fa-solid fa-rotate-left"></i> Desfazer envio
-                            </button>
-                        </div>
-                    </div>
-                    <button type="button" id="sonaCloseErrorBtn" class="sona-err-close" aria-label="Fechar aviso de erro">
-                        <i class="fa-solid fa-xmark"></i>
-                    </button>
-                </div>
-
-                <!-- BARRA DE ENTRADA -->
-                <form class="sona-composer-wrap" id="sonaForm">
-                    <div class="sona-composer" id="sonaComposer">
-                        <div class="sona-input-row">
-                            <i class="fa-solid fa-link sona-link-icon"></i>
-                            <input
-                                type="text"
-                                id="sonaInput"
-                                class="sona-input"
-                                placeholder="Cole o link de um site para analisar ou envie um ficheiro..."
-                                autocomplete="off"
-                            >
+            <main tabindex="-1" class="main-content" id="sonaApp">
+                <section class="sona-shell">
+                    <header class="sona-topbar">
+                        <div class="sona-identity">
+                            <div class="sona-avatar-mini">
+                                <svg class="ti ti-sona" aria-hidden="true"><use href="#ti-sona"/></svg>
+                            </div>
+                            <div>
+                                <strong>Sona</strong>
+                                <span><i class="sona-dot"></i> Online</span>
+                            </div>
                         </div>
 
-                        <div class="sona-toolbar">
-                            <div class="sona-toolbar-left">
-                                <label for="sonaFileInput" class="sona-tool-btn" title="Anexar ficheiro">
-                                    <i class="fa-solid fa-paperclip"></i>
-                                    <input type="file" id="sonaFileInput" hidden>
-                                </label>
-                                <button type="button" id="sonaUrlModeBtn" class="sona-tool-btn" title="Validar formato de URL">
-                                    <i class="fa-solid fa-cloud-arrow-up"></i>
-                                </button>
-                                <span id="sonaAttachedName" class="sona-file-tag" hidden></span>
+                        <div class="sona-status-pill">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <span>A sua segurança, a nossa prioridade</span>
+                            <button type="button" id="sonaResetBtn" class="sona-icon-action" title="Nova conversa" aria-label="Nova conversa">
+                                <i class="fa-solid fa-rotate-left"></i>
+                            </button>
+                        </div>
+                    </header>
+
+                    <div class="sona-body" id="sonaBody">
+                        <div class="sona-hero" id="sonaHero">
+                            <div class="sona-mascot">
+                                <img src="assets/icones/sona.png" alt="Sona" width="114" height="118" onerror="this.style.display='none'; this.parentElement.innerHTML='<span>✦</span>';">
                             </div>
 
-                            <button type="submit" id="sonaSendBtn" class="sona-send-btn" aria-label="Enviar mensagem">
-                                <i class="fa-solid fa-paper-plane"></i>
-                            </button>
+                            <h1>Olá! Eu sou a Sona.</h1>
+                            <p>
+                                Ajudo a rastrear e analisar erros em sites, identificando
+                                vulnerabilidades e possíveis problemas de segurança.
+                            </p>
+
+                            <p class="sona-prompt-lead">Como posso ajudar hoje?</p>
+
+                            <div class="sona-cards">
+                                <button type="button" class="sona-card" data-sona-prompt="Analise o site https://exemplo.com quanto a cabeçalhos de segurança e vulnerabilidades expostas.">
+                                    <span class="sona-card__text">
+                                        <strong>Analisar um site</strong>
+                                    </span>
+                                </button>
+
+                                <button type="button" class="sona-card" data-sona-prompt="Verifique falhas de segurança e erros de configuração no fluxo de autenticação.">
+                                    <span class="sona-card__text">
+                                        <strong>Detectar falhas de segurança</strong>
+                                    </span>
+                                </button>
+
+                                <button type="button" class="sona-card" data-sona-prompt="Gere um relatório claro e objetivo com os principais riscos encontrados.">
+                                    <span class="sona-card__text">
+                                        <strong>Gerar um relatório</strong>
+                                    </span>
+                                </button>
+                            </div>
                         </div>
+
+                        <div class="sona-messages" id="sonaMessages" aria-live="polite"></div>
                     </div>
-                </form>
-            </section>
-        </main>
-    </div>
 
-    <script src="script.js"></script>
-</body>
+                    <!-- BANNER DE ERRO (FORMATO DE URL INVÁLIDO) -->
+                    <div class="sona-error-banner" id="sonaErrorBanner" hidden role="alert">
+                        <div class="sona-error-icon">
+                            <i class="fa-solid fa-circle-exclamation"></i>
+                        </div>
+                        <div class="sona-error-content">
+                            <strong>Formato de URL inválido.</strong>
+                            <p id="sonaErrorText">
+                                Não foi possível iniciar a análise. Certifique-se de que o link contém uma estrutura completa (ex.: <code>https://exemplo.com</code>).
+                            </p>
+                            <div class="sona-error-actions">
+                                <button type="button" id="sonaEditLinkBtn" class="sona-err-btn primary">
+                                    <i class="fa-solid fa-pen"></i> Editar link
+                                </button>
+                                <button type="button" id="sonaUndoBtn" class="sona-err-btn">
+                                    <i class="fa-solid fa-rotate-left"></i> Desfazer envio
+                                </button>
+                            </div>
+                        </div>
+                        <button type="button" id="sonaCloseErrorBtn" class="sona-err-close" aria-label="Fechar aviso de erro">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
 
-</html>
+                    <!-- BARRA DE ENTRADA -->
+                    <form class="sona-composer-wrap" id="sonaForm">
+                        <div class="sona-composer" id="sonaComposer">
+                            <div class="sona-input-row">
+                                <i class="fa-solid fa-link sona-link-icon"></i>
+                                <input
+                                    type="text"
+                                    id="sonaInput"
+                                    aria-label="Link do site ou mensagem para a Sona"
+                                    class="sona-input"
+                                    placeholder="Cole o link de um site para analisar ou envie um ficheiro..."
+                                    autocomplete="off"
+                                >
+                            </div>
+
+                            <div class="sona-toolbar">
+                                <div class="sona-toolbar-left">
+                                    <label for="sonaFileInput" class="sona-tool-btn" title="Anexar ficheiro">
+                                        <i class="fa-solid fa-paperclip"></i>
+                                        <input type="file" id="sonaFileInput" hidden>
+                                    </label>
+                                    <button type="button" id="sonaUrlModeBtn" class="sona-tool-btn" title="Validar formato de URL" aria-label="Validar formato de URL">
+                                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                                    </button>
+                                    <span id="sonaAttachedName" class="sona-file-tag" hidden></span>
+                                </div>
+
+                                <button type="submit" id="sonaSendBtn" class="sona-send-btn" aria-label="Enviar mensagem">
+                                    <i class="fa-solid fa-paper-plane"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+            </main>
+        </div>
+
+        <script src="icons.js"></script>
+        <script src="script.js"></script>
+    </body>
+
+    </html>

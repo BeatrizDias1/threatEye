@@ -1,6 +1,37 @@
 document.addEventListener("DOMContentLoaded", () => {
 
     // ==========================================
+    // 0. FEEDBACK DE FORMULÁRIO (aria-invalid, foco no 1º erro, limpar ao digitar)
+    // ==========================================
+    const sincronizarErros = form => {
+        let primeiro = null;
+        form.querySelectorAll(".input-group").forEach(g => {
+            const erro = g.querySelector(".error-message"), campo = g.querySelector("input");
+            if (!erro || !campo) return;
+            const msg = erro.textContent.trim();
+            if (msg) { campo.setAttribute("aria-invalid", "true"); if (!primeiro) primeiro = campo; }
+            else campo.removeAttribute("aria-invalid");
+        });
+        if (primeiro) primeiro.focus();
+    };
+    ["cadastroForm", "loginForm"].forEach(id => {
+        const form = document.getElementById(id);
+        if (!form) return;
+        form.addEventListener("submit", () => setTimeout(() => sincronizarErros(form), 0));   // depois da validação abaixo
+        form.addEventListener("input", e => {
+            const g = e.target.closest(".input-group"); if (!g) return;
+            const erro = g.querySelector(".error-message"); if (erro) erro.textContent = "";
+            e.target.removeAttribute("aria-invalid");
+        });
+    });
+    const esqueci = document.getElementById("esqueciSenha"), info = document.getElementById("loginInfo");
+    if (esqueci && info) esqueci.addEventListener("click", ev => {
+        ev.preventDefault();
+        info.textContent = "A recuperação de senha não está disponível nesta versão. Cadastre uma nova conta com outro e-mail.";
+        info.hidden = false;
+    });
+
+    // ==========================================
     // 1. LÓGICA DE CADASTRO (cadastro.html)
     // ==========================================
     const cadastroForm = document.getElementById("cadastroForm");
@@ -83,8 +114,10 @@ document.addEventListener("DOMContentLoaded", () => {
             usuarios.push(novoUsuario);
             localStorage.setItem("usuarios", JSON.stringify(usuarios));
 
-            alert("Cadastro realizado com sucesso!");
-            window.location.href = "login.html";
+            const ok = document.getElementById("cadastroOk");
+            if (ok) ok.hidden = false;
+            cadastroForm.querySelector(".btn-submit").disabled = true;
+            setTimeout(() => { window.location.href = "login.html"; }, ok ? 1200 : 0);
         });
     }
 
@@ -97,7 +130,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (loginForm) {
         const password = document.getElementById("password");
         const togglePassword = document.getElementById("togglePassword");
-        const eyeIcon = document.getElementById("eyeIcon");
         const email = document.getElementById("email");
 
         const emailError = document.getElementById("emailError");
@@ -105,15 +137,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (togglePassword) {
             togglePassword.addEventListener("click", function() {
-                if (password.type === "password") {
-                    password.type = "text";
-                    eyeIcon.classList.remove("fa-eye");
-                    eyeIcon.classList.add("fa-eye-slash");
-                } else {
-                    password.type = "password";
-                    eyeIcon.classList.remove("fa-eye-slash");
-                    eyeIcon.classList.add("fa-eye");
-                }
+                const mostrar = password.type === "password";
+                togglePassword.setAttribute("aria-label", mostrar ? "Ocultar senha" : "Mostrar senha");
+                togglePassword.setAttribute("aria-pressed", String(mostrar));
+                password.type = mostrar ? "text" : "password";   // olho aberto = senha visível; fechado = escondida
             });
         }
 
@@ -182,16 +209,35 @@ document.addEventListener("DOMContentLoaded", () => {
     const fileInput = document.getElementById("fileInput");
 
     if (toggleBtn && sidebar && mainContent) {
+        // fundo escuro atrás do menu no celular: clique fora fecha
+        const scrim = document.createElement("div");
+        scrim.className = "nav-scrim"; scrim.hidden = true;
+        document.body.appendChild(scrim);
+        const mobile = () => window.innerWidth <= 768;
+        const sync = () => {
+            const aberto = mobile() ? sidebar.classList.contains("open") : !sidebar.classList.contains("closed");
+            toggleBtn.setAttribute("aria-expanded", String(aberto));
+            scrim.hidden = !(mobile() && sidebar.classList.contains("open"));
+        };
+        const fechaMobile = (devolveFoco) => {
+            if (!sidebar.classList.contains("open")) return;
+            sidebar.classList.remove("open"); sync();
+            if (devolveFoco) toggleBtn.focus();
+        };
         toggleBtn.addEventListener("click", () => {
-            const isMobile = window.innerWidth <= 768;
-
-            if (isMobile) {
+            if (mobile()) {
                 sidebar.classList.toggle("open");
+                if (sidebar.classList.contains("open")) { const p = sidebar.querySelector(".sidebar__item"); if (p) p.focus({ preventScroll: true }); }
             } else {
                 sidebar.classList.toggle("closed");
                 mainContent.classList.toggle("expanded");
             }
+            sync();
         });
+        scrim.addEventListener("click", () => fechaMobile(true));
+        document.addEventListener("keydown", e => { if (e.key === "Escape") fechaMobile(true); });
+        window.addEventListener("resize", () => { if (!mobile()) sidebar.classList.remove("open"); sync(); });
+        sync();
     }
 
     if (navItems.length > 0 && sidebar) {
@@ -228,35 +274,42 @@ document.addEventListener("DOMContentLoaded", () => {
         if (info.length === 2) { info[0].textContent = sessao.nome; info[1].textContent = sessao.email; }
     }
 
+    const ST = window.TEStore ? TEStore.stats() : null;
     const stats = [
-        { t: "Investigações hoje", b: "+12%", c: "t-g", v: 24, s: "Total de artefatos checados" },
-        { t: "IoCs analisados", b: "Ativos", c: "t-p", v: 137, s: "Indicadores catalogados" },
-        { t: "Ameaças críticas", b: "Alta", c: "t-r", v: 8, s: "Requer mitigação imediata", red: true },
-        { t: "Incidentes ativos", b: "Atenção", c: "t-y", v: 3, s: "Equipe SOC engajada" }
+        { v: 24 + (ST ? ST.analises : 0), s: "artefatos checados hoje" },
+        { v: ST ? ST.iocs : 137, s: "IoCs catalogados" },
+        { v: ST ? ST.criticos : 8, s: "indicadores de risco crítico", red: true },
+        { v: window.TEDados ? Object.keys(TEDados.logs).length : 3, s: "incidentes na linha do tempo forense" }
     ];
     const week = [
-        { d: "S", n: "Segunda", v: 62 }, { d: "T", n: "Terça", v: 84 }, { d: "Q", n: "Quarta", v: 70 },
-        { d: "Q", n: "Quinta", v: 108 }, { d: "S", n: "Sexta", v: 92 }, { d: "S", n: "Sábado", v: 142 }, { d: "D", n: "Domingo", v: 118 }
+        { d: "Seg", n: "Segunda", v: 62 }, { d: "Ter", n: "Terça", v: 84 }, { d: "Qua", n: "Quarta", v: 70 },
+        { d: "Qui", n: "Quinta", v: 108 }, { d: "Sex", n: "Sexta", v: 92 }, { d: "Sáb", n: "Sábado", v: 142 }, { d: "Dom", n: "Domingo", v: 118 }
     ];
-    const rows = [
-        { a: "8f14e45f...c21e", t: "SHA-256", r: "Crítico", rc: "p-crit", d: "10:42", s: "Investigando", sc: "s-inv" },
-        { a: "login-secure.update.net", t: "URL / Phishing", r: "Alto", rc: "p-alto", d: "19:07", s: "Concluído", sc: "s-ok" },
-        { a: "cdn-telemetry.io", t: "Domínio", r: "Médio", rc: "p-med", d: "00:37", s: "Concluído", sc: "s-ok" },
-        { a: "185.220.101.42", t: "IP (Tor Exit)", r: "Alto", rc: "p-alto", d: "Ontem", s: "Em Quarentena", sc: "s-q" }
-    ];
+    const nivelSev = { "Crítica": ["Crítico", "crit"], "Alta": ["Alto", "alto"], "Média": ["Médio", "med"], "Baixa": ["Baixo", "ok"] };
+    const salvos = window.TEStore ? TEStore.reports.all().filter(r => r.origem === "sandbox").slice(0, 4).map(r => {
+        const n = nivelSev[r.severidade] || ["Médio", "med"];
+        return { a: r.titulo.length > 28 ? r.titulo.slice(0, 27) + "…" : r.titulo, t: "Sandbox · " + r.id, r: n[0], rc: n[1], d: TEStore.fmtData(r.ts), s: "Salvo", sc: "s-inv" };
+    }) : [];
+    const rows = salvos.concat([
+        { a: "8f14e45f...c21e", t: "SHA-256", r: "Crítico", rc: "crit", d: "10:42", s: "Investigando", sc: "s-inv" },
+        { a: "login-secure.update.net", t: "URL / Phishing", r: "Alto", rc: "alto", d: "19:07", s: "Concluído", sc: "s-ok" },
+        { a: "cdn-telemetry.io", t: "Domínio", r: "Médio", rc: "med", d: "00:37", s: "Concluído", sc: "s-ok" },
+        { a: "185.220.101.42", t: "IP (Tor Exit)", r: "Alto", rc: "alto", d: "Ontem", s: "Em Quarentena", sc: "s-q" }
+    ]).slice(0, 6);
     const $ = id => document.getElementById(id);
 
     statsEl.innerHTML = stats.map(s => `
         <article class="card stat">
-            <div class="top"><span>${s.t}</span><span class="tag ${s.c}">${s.b}</span></div>
             <strong class="${s.red ? "red" : ""}" data-n="${s.v}">0</strong>
             <small>${s.s}</small>
         </article>`).join("");
 
+    const semMovimento = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
     document.querySelectorAll("[data-n]").forEach(el => {
         const end = +el.dataset.n, t0 = performance.now();
+        if (semMovimento) { el.textContent = end; return; }
         const tick = now => {
-            const p = Math.min((now - t0) / 900, 1);
+            const p = Math.min((now - t0) / 500, 1);
             el.textContent = Math.round(end * (1 - Math.pow(1 - p, 3)));
             if (p < 1) requestAnimationFrame(tick);
         };
@@ -265,17 +318,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const max = Math.max(...week.map(w => w.v));
     const peak = week.reduce((a, b) => (b.v > a.v ? b : a));
+    const nf = n => n.toLocaleString("pt-BR");
+    const totalSemana = week.reduce((t, w) => t + w.v, 0);
+    $("chart").setAttribute("role", "group");
+    $("chart").setAttribute("aria-label", `Detecções por dia nos últimos 7 dias. Pico: ${peak.n}, ${nf(peak.v)}. Total da semana: ${nf(totalSemana)}.`);
     $("chart").innerHTML = week.map(w => `
-        <div class="bar ${w === peak ? "peak" : ""}" data-h="${Math.round(w.v / max * 100)}">
-            <em>${w.n}: ${w.v}</em><div class="fill"></div><span>${w.d}</span>
+        <div class="bar ${w === peak ? "peak" : ""}" data-h="${Math.round(w.v / max * 100)}" tabindex="0" role="img" aria-label="${w.n}: ${nf(w.v)} detecções">
+            <em>${w.n}: ${nf(w.v)} detecções</em><b class="bv">${nf(w.v)}</b><div class="fill"></div><span>${w.d}</span>
         </div>`).join("");
-    setTimeout(() => document.querySelectorAll(".bar").forEach(b => b.querySelector(".fill").style.height = b.dataset.h + "%"), 60);
-    $("peak").textContent = `Pico: ${peak.n} (${peak.v} eventos)`;
+    document.querySelectorAll(".bar").forEach(b => b.querySelector(".fill").style.height = b.dataset.h + "%");
+    requestAnimationFrame(() => requestAnimationFrame(() => document.querySelectorAll(".bar").forEach(b => b.classList.add("on"))));
 
     $("tbody").innerHTML = rows.map(r => `
         <tr>
             <td class="mono">${r.a}</td><td>${r.t}</td>
-            <td><span class="pill ${r.rc}">${r.r}</span></td>
+            <td><span class="sev ${r.rc}">${r.r}</span></td>
             <td>${r.d}</td><td class="r ${r.sc}">${r.s}</td>
         </tr>`).join("");
 
@@ -324,16 +381,6 @@ document.addEventListener("DOMContentLoaded", () => {
         timer = setTimeout(() => toast.classList.remove("show"), 2200);
     };
 
-    // Abas: cada card declara em quais abas aparece (data-tabs)
-    const tabs = document.querySelectorAll(".tab");
-    const showTab = name => {
-        tabs.forEach(b => b.classList.toggle("active", b.dataset.tab === name));
-        grid.querySelectorAll("[data-tabs]").forEach(c => c.hidden = !c.dataset.tabs.split(" ").includes(name));
-        grid.querySelectorAll(".set-col").forEach(col => col.hidden = !col.querySelector("[data-tabs]:not([hidden])"));
-        grid.classList.toggle("single", [...grid.children].some(c => c.hidden));
-    };
-    tabs.forEach(b => b.addEventListener("click", () => showTab(b.dataset.tab)));
-    showTab("geral");
 
     // Tema claro / escuro / sistema
     const themeBtns = document.querySelectorAll("[data-theme-opt]");
@@ -370,14 +417,13 @@ document.addEventListener("DOMContentLoaded", () => {
     // Perfil
     const sessao = JSON.parse(sessionStorage.getItem("usuarioLogado") || "null");
     const perfil = JSON.parse(get("te-profile", "null")) || {
-        nome: sessao ? sessao.nome : "Analista ThreatEye",
-        email: sessao ? sessao.email : "analista@threateye.sec",
+        nome: (sessao && sessao.nome) || "Analista ThreatEye",
+        email: (sessao && sessao.email) || "analista@threateye.sec",
         cargo: "SOC Lead Tier 3"
     };
     const renderPerfil = () => {
         $("pfNome").value = perfil.nome; $("pfEmail").value = perfil.email; $("pfCargo").value = perfil.cargo;
-        $("pfTitle").textContent = perfil.nome; $("pfMail").textContent = perfil.email;
-        $("pfRole").textContent = perfil.cargo + " • Squad Alpha";
+        $("pfTitle").textContent = perfil.nome;
         $("pfAv").textContent = perfil.nome.split(/\s+/).map(p => p[0]).slice(0, 2).join("").toUpperCase();
     };
     renderPerfil();
@@ -480,7 +526,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const aplicarFiltro = categoria => {
-        tabs.forEach(btn => btn.classList.toggle("active", btn.dataset.bibTab === categoria));
+        tabs.forEach(btn => { const on = btn.dataset.bibTab === categoria; btn.classList.toggle("active", on); btn.setAttribute("aria-selected", String(on)); });
         tbody.querySelectorAll("tr").forEach(tr => {
             const cat = tr.dataset.categoria || "";
             tr.hidden = categoria !== "todos" && cat !== categoria;
@@ -516,9 +562,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 tr.innerHTML = `
                     <td>${item.modulo}</td>
                     <td>${item.artefato}</td>
-                    <td><span class="status ${item.statusClasse}">${item.statusTexto}</span></td>
-                    <td>${item.analista}</td>
-                    <td>${item.hora}</td>
                     <td><button type="button" class="btn-table">${item.acao}</button></td>
                 `;
                 tbody.appendChild(tr);
@@ -541,9 +584,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 return {
                     modulo: cols[0]?.textContent.trim() || "",
                     artefato: cols[1]?.textContent.trim() || "",
-                    status: cols[2]?.textContent.trim() || "",
-                    analista: cols[3]?.textContent.trim() || "",
-                    carimboUtc: cols[4]?.textContent.trim() || ""
+                    acao: cols[2]?.textContent.trim() || ""
                 };
             });
 
@@ -617,103 +658,15 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         window.scrollTo({ top: 0, behavior: "smooth" });
+        document.dispatchEvent(new CustomEvent("te:view", { detail: viewName }));
     };
+    window.TEBib = { abrirView, notify: notifyView };
 
     viewButtons.forEach(btn => {
         btn.addEventListener("click", () => abrirView(btn.dataset.bibView));
     });
-
-    // --- Filtros da Timeline ---
-    const tlFilters = document.querySelectorAll("[data-tl-filter]");
-    const tlFeed = document.getElementById("timelineFeed");
-    tlFilters.forEach(btn => {
-        btn.addEventListener("click", () => {
-            tlFilters.forEach(b => b.classList.remove("active"));
-            btn.classList.add("active");
-            const tipo = btn.dataset.tlFilter;
-            if (!tlFeed) return;
-            tlFeed.querySelectorAll(".timeline-item").forEach(item => {
-                item.hidden = tipo !== "todos" && item.dataset.tlType !== tipo;
-            });
-        });
-    });
-
-    const loadMoreTl = document.getElementById("loadMoreTimeline");
-    if (loadMoreTl && tlFeed) {
-        loadMoreTl.addEventListener("click", () => {
-            if (loadMoreTl.dataset.loaded === "1") return notifyView("Todos os eventos recentes já foram carregados.");
-            const extra = document.createElement("article");
-            extra.className = "timeline-item";
-            extra.dataset.tlType = "analise";
-            extra.innerHTML = `
-                <div class="tl-badge info"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
-                <div class="tl-body">
-                    <div class="tl-meta"><span>07:12:44 · Ontem</span><span class="status approved">Concluído</span></div>
-                    <h3>Varredura de Reputação de Domínios</h3>
-                    <p>18 domínios recém-observados no proxy corporativo foram correlacionados sem indícios de C2.</p>
-                    <div class="tl-tags"><span>ID: #74819</span><span>Por: Sistema ThreatEye</span></div>
-                </div>`;
-            tlFeed.appendChild(extra);
-            loadMoreTl.dataset.loaded = "1";
-            notifyView("Eventos anteriores carregados na timeline.");
-        });
-    }
-
-    // --- Busca, Filtros e Copiar na Base de IoCs ---
-    const iocSearch = document.getElementById("iocSearchInput");
-    const iocType = document.getElementById("iocTypeFilter");
-    const iocSev = document.getElementById("iocSeverityFilter");
-    const iocOrigin = document.getElementById("iocOriginFilter");
-    const iocsTbody = document.getElementById("iocsTbody");
-    const iocPageInfo = document.getElementById("iocPageInfo");
-
-    const filtrarIocs = () => {
-        if (!iocsTbody) return;
-        const termo = (iocSearch?.value || "").trim().toLowerCase();
-        const tipo = iocType?.value || "todos";
-        const sev = iocSev?.value || "todos";
-        const orig = iocOrigin?.value || "todos";
-        let visiveis = 0;
-
-        iocsTbody.querySelectorAll("tr").forEach(tr => {
-            const texto = tr.textContent.toLowerCase();
-            const rowTipo = tr.dataset.iocType || "";
-            const rowSev = tr.dataset.iocSev || "";
-            const rowOrig = tr.dataset.iocOrigin || "";
-
-            const match =
-                (!termo || texto.includes(termo)) &&
-                (tipo === "todos" || rowTipo === tipo) &&
-                (sev === "todos" || rowSev === sev) &&
-                (orig === "todos" || rowOrig === orig);
-
-            tr.hidden = !match;
-            if (match) visiveis++;
-        });
-
-        if (iocPageInfo) {
-            iocPageInfo.textContent = `Exibindo ${visiveis} indicador(es) · Página 1 de 1`;
-        }
-    };
-
-    [iocSearch, iocType, iocSev, iocOrigin].forEach(el => {
-        if (el) {
-            el.addEventListener("input", filtrarIocs);
-            el.addEventListener("change", filtrarIocs);
-        }
-    });
-
-    if (iocsTbody) {
-        iocsTbody.addEventListener("click", event => {
-            const btn = event.target.closest(".ioc-copy-btn");
-            if (!btn) return;
-            const val = btn.dataset.iocVal || "";
-            if (navigator.clipboard && val) {
-                navigator.clipboard.writeText(val).catch(() => {});
-            }
-            notifyView(`IoC copiado: ${val}`);
-        });
-    }
+    window.addEventListener("hashchange", () => { const h = location.hash.slice(1); if (h) abrirView(h); });
+    setTimeout(() => { const h = location.hash.slice(1); if (h && document.getElementById("view-" + h)) abrirView(h); }, 0);
 
     // --- Novo Relatório ---
     const nrForm = document.getElementById("novoRelatorioForm");
@@ -762,17 +715,18 @@ document.addEventListener("DOMContentLoaded", () => {
             const resumo = document.getElementById("nrResumo").value.trim();
             if (!titulo || !resumo) return notifyView("Preencha o título e o resumo executivo.");
 
-            const grid = document.getElementById("relatoriosGrid");
-            if (grid) {
-                const codigo = `REL-2026-0${Math.floor(91 + Math.random() * 8)}`;
-                const card = document.createElement("article");
-                card.className = "biblioteca-card";
-                card.innerHTML = `
-                    <div class="card-title"><i class="fa-regular fa-file-lines"></i><h2>${codigo} · ${titulo}</h2></div>
-                    <p>${resumo}</p>
-                    <div class="card-info"><span>SEVERIDADE: ${severidade.toUpperCase()}</span><span class="status approved">Publicado</span></div>
-                    <div class="card-footer"><span>Autor: Analista SOC L3 · ${nrIocList?.children.length || 0} IoCs vinculados</span></div>`;
-                grid.prepend(card);
+            if (window.TEStore) {
+                const tlp = { "Crítica": "TLP:RED", "Alta": "TLP:AMBER", "Média": "TLP:GREEN", "Baixa": "TLP:CLEAR" }[severidade] || "TLP:AMBER";
+                const iocs = [...(nrIocList ? nrIocList.children : [])].map(li => {
+                    const m = li.textContent.match(/^\[(.+?)\]\s*(.+?)\s*Remover$/);
+                    return m ? { tipo: m[1], valor: m[2] } : null;
+                }).filter(Boolean);
+                TEStore.reports.add({
+                    titulo, resumo, severidade, tlp, confianca: "Moderada", mitre: (document.getElementById("nrTags")?.value || "").split(",")[0].trim() || "—",
+                    autor: "Analista SOC L3", nIocs: iocs.length, iocs, origem: "manual",
+                    tags: (document.getElementById("nrTags")?.value || "").split(",").map(t => t.trim()).filter(Boolean),
+                    detalhes: document.getElementById("nrDetalhes")?.value.trim() || ""
+                });
             }
 
             nrForm.reset();
